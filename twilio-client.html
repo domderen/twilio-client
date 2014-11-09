@@ -130,7 +130,7 @@ and supports browser-to-browser calls.
           cachableAjax.url = this.capabilityTokenUrl;
 
           if(this.clientName) {
-            cachableAjax.params = {ClientName: this.clientName};
+            cachableAjax.params = {clientName: this.clientName};
           }
 
           return cachableAjax.go().then(function (token) {

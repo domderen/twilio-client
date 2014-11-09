@@ -21,16 +21,20 @@ app.get('/capability/', function (req, res) {
 });
 
 app.get('/', function (req, res) {
+  var resp = new twilio.TwimlResponse();
+
+  resp.dial({
+    callerId: cfg.callerId
+  }, function(node) {
+    if(req.query.PhoneNumber) {
+      node.number(req.query.PhoneNumber);
+    } else {
+      node.client('someClient');
+    }
+  });
+
   res.set('Content-Type', 'text/xml');
-
-  var data = '<Client>someClient</Client>';
-
-  if(req.query.PhoneNumber) {
-    data = '<Number>' + req.query.PhoneNumber + '</Number>';
-  }
-
-  var response = '<?xml version="1.0" encoding="UTF-8"?> <Response><Dial callerId="' + cfg.callerId + '">' + data + '</Dial></Response>';
-  res.send(response);
+  res.send(resp.toString());
 });
 
 var server = app.listen(3000, function () {

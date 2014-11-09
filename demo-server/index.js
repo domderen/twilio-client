@@ -1,6 +1,6 @@
 'use strict';
 
-var cfg = require('./config-example.json');
+var cfg = require('./config.json');
 var twilio = require('twilio');
 var express = require ('express');
 

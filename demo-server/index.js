@@ -21,6 +21,8 @@ app.get('/capability/:clientName', function (req, res) {
 });
 
 app.get('/', function (req, res) {
+  res.set('Content-Type', 'text/xml');
+
   var data = '<Client>someClient</Client>';
 
   if(req.query.PhoneNumber) {

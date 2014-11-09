@@ -11,8 +11,8 @@ and supports browser-to-browser calls.
 
 ## Example
 
-    `<twilio-client
+    <twilio-client
     capailityToken="54h54h7j8k8"
     capailityTokenUrl="<URL-TO-YOUR-TWILIO-APP>"
     number="=48123456789">
-    clientName="someName"</twilio-client>`
+    clientName="someName"</twilio-client>

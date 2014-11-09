@@ -1,0 +1,6 @@
+{
+  "accountSid": "<Your-twilio-account-sid>",
+  "authToken": "<Your-twilio-auth-token>",
+  "applicationSid": "<Your-twilio-application-sid>",
+  "callerId": "<Your-caller-id-for-outgoing-calls>"
+}

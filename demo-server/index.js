@@ -28,6 +28,8 @@ app.get('/', function (req, res) {
   }, function(node) {
     if(req.query.PhoneNumber) {
       node.number(req.query.PhoneNumber);
+    } else if(req.query.ClientName) {
+      node.client(req.query.ClientName);
     } else {
       node.client('someClient');
     }

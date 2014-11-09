@@ -12,10 +12,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/capability/:clientName', function (req, res) {
+app.get('/capability/', function (req, res) {
   var capability = new twilio.Capability(cfg.accountSid, cfg.authToken);
   capability.allowClientOutgoing(cfg.applicationSid);
-  capability.allowClientIncoming(req.params.clientName);
+  capability.allowClientIncoming(req.query.clientName);
   var token = capability.generate();
   res.send(token);
 });

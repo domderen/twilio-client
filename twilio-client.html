@@ -88,6 +88,8 @@ and supports browser-to-browser calls.
         number: '',
 
         ready: function () {
+          cachableAjax.auto = false;
+
           if(this.capabilityToken) {
             this.setupClient(this.capabilityToken);
           } else if(this.capabilityTokenUrl) {
@@ -125,18 +127,17 @@ and supports browser-to-browser calls.
         },
 
         getToken: function () {
-          cachableAjax.auto = false;
           cachableAjax.url = this.capabilityTokenUrl;
 
           if(this.clientName) {
             cachableAjax.params = {ClientName: this.clientName};
           }
 
-          return cachableAjax.go().then(function (e) {
-            this.capabilityToken = e.detail.response;
+          return cachableAjax.go().then(function (token) {
+            this.capabilityToken = token;
           }, function (err) {
             throw new Error('The request for capabilityTokenUrl has failed. Please confirm the correctness of the' +
-            'url, and try again. If it still does not work, please check your server setup.');
+            'url, and try again. If it still does not work, please check your server setup.\n' + err);
           });
         },
 
@@ -147,7 +148,12 @@ and supports browser-to-browser calls.
          */
         call: function () {
           // get the phone number to connect the call to
-          params = { "PhoneNumber": this.number };
+          var params;
+
+          if(this.number) {
+            params = { "PhoneNumber": this.number };
+          }
+
           Twilio.Device.connect(params);
         },
 

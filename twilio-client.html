@@ -138,6 +138,16 @@ and supports browser-to-browser calls.
           });
         },
 
+        isValidPhoneNumber: function (phone) {
+        var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+
+        if (regex.test(phone)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+
         /**
          * The `call` method performs the connection to the twilio device.
          *
@@ -147,8 +157,10 @@ and supports browser-to-browser calls.
           // get the phone number to connect the call to
           var params;
 
-          if(this.number) {
+          if(this.isValidPhoneNumber(this.number)) {
             params = { "PhoneNumber": this.number };
+          } else if (this.number) {
+            params = { "ClientName": this.number };
           }
 
           Twilio.Device.connect(params);

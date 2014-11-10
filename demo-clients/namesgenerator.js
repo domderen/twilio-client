@@ -69,11 +69,11 @@ var left = [ "happy", "jolly", "dreamy", "sad", "angry",
 // a random name before failing.
 // Returns name or null if unable to generate a name that
 // doesn't exist after the specified number of retries.
-(function () {
+(function (win) {
   'use strict';
 
-  if(!Utils) {
-    Utils = {};
+  if(!win.Utils) {
+    win.Utils = {};
   }
 
   Utils.NamesGenerator = function () {
@@ -90,23 +90,7 @@ var left = [ "happy", "jolly", "dreamy", "sad", "angry",
 
     return randelem(left) + _ + randelem(right);
   };
-})();
-
-module.exports = function (checker) {
-  var name
-    , retry = arguments.length > 1 && typeof arguments[1] == 'number' ?
-      arguments[1] : 5;
-
-  name = util.format('%s_%s', randelem(left), randelem(right));
-
-  while (checker && checker(name) && retry) {
-    name = util.format('%s%d', name, randnum(10));
-    retry--;
-  }
-
-  return retry ? name : null;
-};
-
+})(window);
 
 
 

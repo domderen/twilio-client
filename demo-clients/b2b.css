@@ -87,13 +87,13 @@ http://github.com/necolas/css3-github-buttons
 
 /* ------------------------------------------------------------------------------------------------------------- BUTTON */
 
-button.call, button.hangup, input {
+button.call, button.hangup, button.anykey, input {
   -moz-box-shadow: 1px 2px 10px #BBB;
   -webkit-box-shadow: 1px 2px 10px #BBB;
   box-shadow: 1px 2px 10px #BBB;
 }
 
-button.call, button.hangup {
+button.call, button.hangup, button.anykey {
   position: relative;
   overflow: visible;
   display: inline-block;
@@ -132,7 +132,11 @@ button.call.active,
 button.hangup:hover,
 button.hangup:focus,
 button.hangup:active,
-button.hangup.active {
+button.hangup.active,
+button.anykey:hover,
+button.anykey:focus,
+button.anykey:active,
+button.anykey.active {
   border-color: #3072b3;
   border-bottom-color: #2a65a0;
   text-decoration: none;
@@ -148,7 +152,9 @@ button.hangup.active {
 button.call:active,
 button.call.active,
 button.hangup:active,
-button.hangup.active {
+button.hangup.active,
+button.anykey:active,
+button.anykey.active {
   border-color: #2a65a0;
   border-bottom-color: #3884CF;
   background-color: #3072b3;
@@ -160,7 +166,8 @@ button.hangup.active {
 
 /* overrides extra padding on button elements in Firefox */
 button.call::-moz-focus-inner,
-button.hangup::-moz-focus-inner {
+button.hangup::-moz-focus-inner,
+button.anykey::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
@@ -179,7 +186,8 @@ input {
 /* ............................................................................................................. Icons */
 
 button.call:before,
-button.hangup:before {
+button.hangup:before,
+button.anykey:before {
   content: "";
   position: relative;
   top: 1px;
@@ -203,3 +211,12 @@ button.hangup:before { background-position: 0 -131px; }
 button.hangup:hover:before,
 button.hangup:focus:before,
 button.hangup:active:before { background-position: 0 -88px; }
+
+button.anykey {
+  margin-left: 25px;
+}
+
+button.anykey:before { background-position: 0 -131px; }
+button.anykey:hover:before,
+button.anykey:focus:before,
+button.anykey:active:before { background-position: 0 -88px; }

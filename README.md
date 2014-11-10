@@ -1,22 +1,26 @@
 twilio-client
 ================
 
+Twilio client element, being able to perform outgoing calls, receive incoming calls,
+and supports browser-to-browser calls.
+
 See the [component page](http://domderen.github.io/components/twilio-client) for more information.
 
 ## Getting Started
 
-Twilio client element, being able to perform outgoing calls, receive incoming calls,
-and supports browser-to-browser calls.
-
 Inspired by Szymon Nowak during the presentation [WebRTC - so much more than just video conferencing](http://vimeo.com/111287617)
+
+To run the demo application, please follow the steps described in the "Run demo" section.
 
 ## Example
 
+Examplary use of the component on the web page. For 
+
     <twilio-client
-    capailityToken="54h54h7j8k8"
+    capailityToken="<YOUR-TWILIO-CAPABILITY-TOKEN>"
     capailityTokenUrl="<URL-TO-YOUR-TWILIO-APP>"
-    number="=48123456789">
-    clientName="someName"</twilio-client>
+    number="<NUMBER-TO-PREFILL-THE-TEXTBOX>">
+    clientName="<NAME-UNDER-WHICH-BROWSER-WIL-BE-REGISTERED-AS-A-CLIENT>"</twilio-client>
     
 ## Run demo
 

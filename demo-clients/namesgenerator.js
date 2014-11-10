@@ -76,6 +76,11 @@ var left = [ "happy", "jolly", "dreamy", "sad", "angry",
     win.Utils = {};
   }
 
+  /**
+   * Returns generated random name similar to docker container name.
+   *
+   * @return {string} Generated name.
+   */
   Utils.NamesGenerator = function () {
     function randnum(n) {
       var min = 0
@@ -88,7 +93,7 @@ var left = [ "happy", "jolly", "dreamy", "sad", "angry",
       return a[randnum(a.length)];
     }
 
-    return randelem(left) + _ + randelem(right);
+    return randelem(left) + '_' + randelem(right);
   };
 })(window);
 

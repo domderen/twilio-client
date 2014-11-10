@@ -36,6 +36,10 @@ and supports browser-to-browser calls.
       Hang Up
     </button>
 
+    <button class="anykey" on-click="{{anyKey}}">
+      Any Key
+    </button>
+
     <ul>
       <template repeat="{{a in available}}">
         <li id="{{a.from}}">{{a.from}} - {{a.available}}</li>
@@ -203,6 +207,18 @@ and supports browser-to-browser calls.
          */
         hangUp: function () {
           Twilio.Device.disconnectAll();
+        },
+
+        /**
+         * The `anyKey` method simulates pressing '1' on the keypad, to move forward with the messages.
+         *
+         * @method anyKey
+         */
+        anyKey: function () {
+          var conn = Twilio.Device.activeConnection();
+          if (conn) {
+            conn.sendDigits('1');
+          }
         }
       });
     })();

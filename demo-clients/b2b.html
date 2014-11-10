@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>twilio-client Demo</title>
+
+  <script src="../../platform/platform.js"></script>
+  <script type="text/javascript"
+          src="//static.twilio.com/libs/twiliojs/1.2/twilio.js"></script>
+  <link rel="import" href="../twilio-client.html">
+
+  <link href="http://static0.twilio.com/packages/quickstart/client.css"
+        type="text/css" rel="stylesheet" />
+
+</head>
+<body unresolved>
+
+<h3>Client Name</h3>
+<div id="clientName"></div>
+<twilio-client capabilityTokenUrl="/capability"></twilio-client>
+
+
+<script>
+  function generateClientName()
+  {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  document.addEventListener('polymer-ready', function() {
+    var client = document.querySelector('twilio-client');
+    var clientNameDiv = document.querySelector('#clientName');
+    var clientName = generateClientName();
+
+    clientNameDiv.text = clientName;
+    client.clientName = clientName;
+  });
+</script>
+</body>
+</html>

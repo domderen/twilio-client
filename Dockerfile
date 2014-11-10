@@ -8,6 +8,8 @@ RUN     yum install -y npm
 # Bundle app source
 COPY . /src/twilio
 
+RUN npm install bower -g
+
 # Install client dependencies
 RUN cd /src/twilio; bower install
 

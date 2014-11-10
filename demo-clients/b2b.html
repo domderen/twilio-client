@@ -32,14 +32,12 @@
     return text;
   }
 
-  document.addEventListener('polymer-ready', function() {
-    var client = document.querySelector('twilio-client');
-    var clientNameDiv = document.querySelector('#clientName');
-    var clientName = generateClientName();
+  var client = document.querySelector('twilio-client');
+  var clientNameDiv = document.querySelector('#clientName');
+  var clientName = generateClientName();
 
-    clientNameDiv.text = clientName;
-    client.clientName = clientName;
-  });
+  clientNameDiv.text = clientName;
+  client.clientName = clientName;
 </script>
 </body>
 </html>

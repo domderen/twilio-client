@@ -11,7 +11,7 @@ COPY . /src/twilio
 RUN npm install bower -g
 
 # Install client dependencies
-RUN cd /src/twilio; bower install
+RUN cd /src/twilio; bower install --allow-root
 
 # Install server dependencies
 RUN cd /src/twilio/server-demo; npm install

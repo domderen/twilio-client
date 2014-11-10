@@ -52,7 +52,7 @@ This will run the server-demo application on port 3000.
  
 To check the setup go to: 
 
-    `http://[your-application-host]:3000/`
+    http://[your-application-host]:3000/
  
  this should bring up a page with XML response:
  
@@ -64,7 +64,7 @@ To check the setup go to:
      
 Next, to finish setting up Twilio application, go to your **Twilio Dashboard -> DEV TOOLS -> TWIML APPS** and edit the details of the application, you have previously selected. Here, as the Voice Request URL provide your main host address 
     
-    `http://[your-application-host]:3000/`
+    http://[your-application-host]:3000/
      
 and as a method choose HTTP GET.
  
@@ -72,11 +72,11 @@ Finally, go to **Dashboard -> NUMBERS -> TWILIO NUMBERS** and edit one of your n
  
 Now you are ready to start using the twilio-client. Go to 
 
-    `http://[your-application-host]:3000/demo/twilio-client/demo-clients/demo.html`
+    http://[your-application-host]:3000/demo/twilio-client/demo-clients/demo.html
 
 and 
 
-    `http://[your-application-host]:3000/demo/twilio-client/demo-clients/demo-second-client.html`
+    http://[your-application-host]:3000/demo/twilio-client/demo-clients/demo-second-client.html
 
 in another browser window, to test browser-to-browser communication.
  

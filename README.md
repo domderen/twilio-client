@@ -42,9 +42,13 @@ On a docker host machine, run command:
 
 ### 2) Running demo server as node application
  
-Go to the directory, where you have cloned this repo, and run command:
+Go to the directory, where you have cloned this repo, and run commands:
  
-     node demo-server/index.js --accountSid <Your-accountSid> --authToken <Your-authToken> --applicationSid <Your-applicationSid> --callerId <Your-callerId>
+     npm install bower -g
+     bower install
+     cd demo-server
+     npm install
+     node index.js --accountSid <Your-accountSid> --authToken <Your-authToken> --applicationSid <Your-applicationSid> --callerId <Your-callerId>
       
 **Bear in mind that server application has to be accessible by Twilio application, so you have to set up this application on public network.**
 

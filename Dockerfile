@@ -14,8 +14,8 @@ COPY . /src/twilio
 RUN cd /src/twilio; bower install --allow-root
 
 # Install server dependencies
-RUN cd /src/twilio/server-demo; npm install
+RUN cd /src/twilio/demo-server; npm install
 
 EXPOSE 3000
 
-CMD ["node", "/src/twilio/server-demo/index.js"]
+CMD ["node", "/src/twilio/demo-server/index.js"]

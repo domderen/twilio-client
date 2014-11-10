@@ -48,11 +48,11 @@ Inspired by Szymon Nowak during the presentation [WebRTC - so much more than jus
  
  To check the setup go to: http://<your-application-host>:3000/ this should bring up a page with XML response:
  
-     <Response>
+     `<Response>
          <Dial callerId="48792467588">
              <Client>someClient</Client>
          </Dial>
-     </Response>
+     </Response>`
      
  Next, to finish setting up Twilio application, go to your Twilio Dashboard -> DEV TOOLS -> TWIML APPS and edit the details of the application, you have previously selected. Here, as the Voice Request URL provide your main host address http://<your-application-host>:3000/ and as a method choose HTTP GET.
  

@@ -8,14 +8,14 @@ RUN     yum install -y npm git
 RUN npm install bower -g
 
 # Bundle app source
-COPY . /src/twilio
+COPY . /src/twilio-client
 
 # Install client dependencies
-RUN cd /src/twilio; bower install --allow-root
+RUN cd /src/twilio-client; bower install --allow-root
 
 # Install server dependencies
-RUN cd /src/twilio/demo-server; npm install
+RUN cd /src/twilio-client/demo-server; npm install
 
 EXPOSE 3000
 
-CMD ["node", "/src/twilio/demo-server/index.js"]
+CMD ["node", "/src/twilio-client/demo-server/index.js"]

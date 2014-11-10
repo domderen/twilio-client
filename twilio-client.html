@@ -93,19 +93,33 @@ and supports browser-to-browser calls.
         available: [],
 
         /**
-         * 'autoInit' If true, automatically performs component startup.
+         * 'auto' If true, automatically performs component startup.
          *
-         * @attribute autoInit
+         * @attribute auto
          * @type boolean
          * @default false
          */
-        autoInit: false,
+        auto: false,
 
         ready: function () {
           cachableAjax.auto = false;
           self = this;
+        },
 
-          if(self.autoInit) {
+        capabilityTokenChanged: function () {
+          self.autoInit();
+        },
+
+        capabilityTokenUrlChanged: function () {
+          self.autoInit();
+        },
+
+        autoChanged: function () {
+          self.autoInit();
+        },
+
+        autoInit: function () {
+          if(self.auto) {
             self.init();
           }
         },

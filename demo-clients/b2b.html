@@ -17,6 +17,21 @@
 <h4 id="clientName"></h4>
 <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
+<input class="number" type="text"
+       placeholder="Enter a phone number to call"/>
+
+<button class="call" on-click="{{call}}">
+  Call
+</button>
+
+<button class="hangup" on-click="{{hangUp}}">
+  Hang Up
+</button>
+
+<button class="anykey" on-click="{{anyKey}}">
+  Any Key
+</button>
+
 
 <script>
   var client = document.querySelector('twilio-client');
@@ -25,6 +40,19 @@
 
   clientNameDiv.innerHTML = clientName;
   client.clientName = clientName;
+
+  document.addEventListener('polymer-ready', function () {
+    var callButton = document.querySelector('.call');
+    var hangUpButton = document.querySelector('.hangup');
+    var anyKeyButton = document.querySelector('.anykey');
+    callButton.onclick = function () {
+      var number = document.querySelector('.number').value;
+      client.call(number);
+    };
+
+    hangUpButton.onclick = client.hangUp;
+    anyKeyButton.onclick = client.anyKey;
+  });
 </script>
 </body>
 </html>

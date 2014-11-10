@@ -25,22 +25,6 @@ and supports browser-to-browser calls.
 <polymer-element name="twilio-client" attributes="capabilityToken capabilityTokenUrl number clientName">
   <template>
     <link rel="stylesheet" href="twilio-client.css"/>
-
-    <input type="text" value="{{number}}"
-           placeholder="Enter a phone number to call"/>
-
-    <button class="call" on-click="{{call}}">
-      Call
-    </button>
-
-    <button class="hangup" on-click="{{hangUp}}">
-      Hang Up
-    </button>
-
-    <button class="anykey" on-click="{{anyKey}}">
-      Any Key
-    </button>
-
     <ul>
       <template repeat="{{a in available}}">
         <li id="{{a.from}}">{{a.from}} - {{a.available}}</li>
@@ -188,14 +172,14 @@ and supports browser-to-browser calls.
          *
          * @method call
          */
-        call: function () {
+        call: function (number) {
           // get the phone number to connect the call to
           var params;
 
-          if (self.isValidPhoneNumber(self.number)) {
-            params = {"PhoneNumber": self.number};
+          if (self.isValidPhoneNumber(number || self.number)) {
+            params = {"PhoneNumber": number || self.number};
           } else if (self.number) {
-            params = {"ClientName": self.number};
+            params = {"ClientName": number || self.number};
           }
 
           Twilio.Device.connect(params);

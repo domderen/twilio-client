@@ -14,6 +14,6 @@
     "cachable-ajax": "~0.3.1"
   },
   "devDependencies": {
-    "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.0"
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.2"
   }
 }

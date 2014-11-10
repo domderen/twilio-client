@@ -2,9 +2,11 @@ FROM    centos:centos6
 
 # Enable EPEL for Node.js
 RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+
 # Install Node.js and npm
 RUN     yum install -y npm git
 
+# Install bower package manager globally
 RUN npm install bower -g
 
 # Copy package management files, and download dependencies
@@ -25,4 +27,5 @@ COPY . /src/twilio-client
 EXPOSE 3000
 
 # Default command to run, if building with config.json. Otherwise, please run this command with proper parameters.
+# List of required parameters is described in the README.md file.
 CMD ["node", "/src/twilio-client/demo-server/index.js"]

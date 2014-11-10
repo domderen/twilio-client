@@ -16,7 +16,7 @@
 <body unresolved>
 
 <h3>Client Name</h3>
-<div id="clientName"></div>
+<h4 id="clientName"></h4>
 <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
 
@@ -36,7 +36,7 @@
   var clientNameDiv = document.querySelector('#clientName');
   var clientName = generateClientName();
 
-  clientNameDiv.text = clientName;
+  clientNameDiv.innerHTML = clientName;
   client.clientName = clientName;
 </script>
 </body>

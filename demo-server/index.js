@@ -1,8 +1,41 @@
 'use strict';
 
-var cfg = require('./config.json');
+var fs = require('fs');
+var nconf = require('nconf');
 var twilio = require('twilio');
 var express = require ('express');
+
+var configFilePath = __dirname + '/config.json';
+
+console.log('config file path: ' + configFilePath);
+
+nconf.argv()
+  .env()
+  .file({ file: configFilePath });
+
+nconf.use('file', { file: configFilePath });
+nconf.load();
+
+console.log('accountSid: ' + nconf.get('accountSid'));
+console.log('authToken: ' + nconf.get('authToken'));
+console.log('applicationSid: ' + nconf.get('applicationSid'));
+console.log('callerId: ' + nconf.get('callerId'));
+
+nconf.set('accountSid', nconf.get('accountSid'));
+nconf.set('authToken', nconf.get('authToken'));
+nconf.set('applicationSid', nconf.get('applicationSid'));
+nconf.set('callerId', nconf.get('callerId'));
+
+nconf.save(function (err) {
+  if(err) {
+    console.log(err);
+  } else {
+    fs.readFile(configFilePath, function (err, data) {
+      console.log('Config file contents:');
+      console.dir(JSON.parse(data.toString()))
+    });
+  }
+});
 
 var app = express();
 
@@ -20,8 +53,8 @@ app.use(function(req, res, next) {
 });
 
 app.get('/capability/', function (req, res) {
-  var capability = new twilio.Capability(cfg.accountSid, cfg.authToken);
-  capability.allowClientOutgoing(cfg.applicationSid);
+  var capability = new twilio.Capability(nconf.get('accountSid'), nconf.get('authToken'));
+  capability.allowClientOutgoing(nconf.get('applicationSid'));
   capability.allowClientIncoming(req.query.clientName);
   var token = capability.generate();
   res.send(token);
@@ -31,7 +64,7 @@ app.get('/', function (req, res) {
   var resp = new twilio.TwimlResponse();
 
   resp.dial({
-    callerId: cfg.callerId
+    callerId: nconf.get('callerId')
   }, function(node) {
     if(req.query.PhoneNumber) {
       node.number(req.query.PhoneNumber);
@@ -49,8 +82,6 @@ app.get('/', function (req, res) {
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
-
-  console.log(cfg);
 
   console.log('Example app listening at http://%s:%s', host, port);
 });

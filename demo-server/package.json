@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.10.1",
+    "nconf": "^0.6.9",
     "twilio": "^1.7.0"
   }
 }

@@ -6,6 +6,8 @@
 
   <script src="../../platform/platform.js"></script>
   <script type="text/javascript"
+          src="namesgenerator.js"></script>
+  <script type="text/javascript"
           src="//static.twilio.com/libs/twiliojs/1.2/twilio.js"></script>
   <link rel="import" href="../twilio-client.html">
 
@@ -21,20 +23,9 @@
 
 
 <script>
-  function generateClientName()
-  {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-  }
-
   var client = document.querySelector('twilio-client');
   var clientNameDiv = document.querySelector('#clientName');
-  var clientName = generateClientName();
+  var clientName = Utils.NamesGenerator();
 
   clientNameDiv.innerHTML = clientName;
   client.clientName = clientName;

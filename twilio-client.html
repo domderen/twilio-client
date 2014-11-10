@@ -119,16 +119,12 @@ and supports browser-to-browser calls.
         },
 
         autoInit: function () {
-          if(self.auto) {
+          if(self.auto && !self.initialized) {
             self.initJob = self.job(self.initJob, self.init, 0);
           }
         },
 
         init: function () {
-          if(self.initialized) {
-            throw new Error('Initialization already started. If it fails please try again.');
-          }
-
           if (self.capabilityToken) {
             Promise.resolve().then(function () { return self.capabilityToken; }).then(self.setupClient);
             self.initialized = true;

@@ -120,7 +120,7 @@ and supports browser-to-browser calls.
 
         autoInit: function () {
           if(self.auto) {
-            self.init();
+            self.initJob = self.job(self.initJob, self.init, 0);
           }
         },
 

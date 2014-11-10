@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
-  <link rel="import" href="../cachable-ajax/cachable-ajax.html">
+<link rel="import" href="../cachable-ajax/cachable-ajax.html">
+
+<script src="../lodash/dist/lodash.min.js"></script>
 
 <!--
 Twilio client element, being able to perform outgoing calls, receive incoming calls,
@@ -34,12 +36,19 @@ and supports browser-to-browser calls.
       Hang Up
     </button>
 
+    <ul>
+      <template repeat="{{a in available}}">
+        <li id="{{a.from}}">{{a.from}} - {{a.available}}</li>
+      </template>
+    </ul>
+
   </template>
 
   <script>
     (function () {
 
       var cachableAjax = document.createElement('cachable-ajax');
+      var self;
 
       Polymer({
         /**
@@ -84,13 +93,25 @@ and supports browser-to-browser calls.
          */
         number: '',
 
+        /**
+         * 'available' is the array of people being currently available in the application.
+         *
+         * @attribute available
+         * @type array
+         * @default '[]'
+         */
+        available: [],
+
         ready: function () {
           cachableAjax.auto = false;
+          self = this;
 
-          if(this.capabilityToken) {
-            this.setupClient(this.capabilityToken);
-          } else if(this.capabilityTokenUrl) {
-            this.getToken().then(this.setupClient);
+          if (self.capabilityToken) {
+            self.setupClient(self.capabilityToken);
+          } else if (self.capabilityTokenUrl) {
+            self.getToken().then(function (token) {
+              self.setupClient(token);
+            });
           } else {
             throw new Error('No configuration parameters provided. Please provide either "capabilityToken" or ' +
             'the "capabilityTokenUrl". For further details, please consult the documentation.');
@@ -98,7 +119,7 @@ and supports browser-to-browser calls.
         },
 
         setupClient: function (capabilityToken) {
-          Twilio.Device.setup(capabilityToken || this.capabilityToken);
+          Twilio.Device.setup(capabilityToken || self.capabilityToken);
 
           Twilio.Device.ready(function (device) {
             console.log('Ready');
@@ -121,17 +142,30 @@ and supports browser-to-browser calls.
             // accept the incoming connection and start two-way audio
             conn.accept();
           });
+
+          Twilio.Device.presence(function (pres) {
+            var alreadyExists = _.find(self.available, function (av) {
+              return av.from === pres.from;
+            });
+
+            if (alreadyExists) {
+              alreadyExists.available = pres.available;
+            }
+            else {
+              self.available.push(pres);
+            }
+          });
         },
 
         getToken: function () {
-          cachableAjax.url = this.capabilityTokenUrl;
+          cachableAjax.url = self.capabilityTokenUrl;
 
-          if(this.clientName) {
-            cachableAjax.params = {clientName: this.clientName};
+          if (self.clientName) {
+            cachableAjax.params = {clientName: self.clientName};
           }
 
           return cachableAjax.go().then(function (token) {
-            this.capabilityToken = token;
+            self.capabilityToken = token;
           }, function (err) {
             throw new Error('The request for capabilityTokenUrl has failed. Please confirm the correctness of the' +
             'url, and try again. If it still does not work, please check your server setup.\n' + err);
@@ -139,14 +173,10 @@ and supports browser-to-browser calls.
         },
 
         isValidPhoneNumber: function (phone) {
-        var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+          var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
-        if (regex.test(phone)) {
-          return true;
-        } else {
-          return false;
-        }
-      },
+          return !!regex.test(phone);
+        },
 
         /**
          * The `call` method performs the connection to the twilio device.
@@ -157,10 +187,10 @@ and supports browser-to-browser calls.
           // get the phone number to connect the call to
           var params;
 
-          if(this.isValidPhoneNumber(this.number)) {
-            params = { "PhoneNumber": this.number };
-          } else if (this.number) {
-            params = { "ClientName": this.number };
+          if (self.isValidPhoneNumber(self.number)) {
+            params = {"PhoneNumber": self.number};
+          } else if (self.number) {
+            params = {"ClientName": self.number};
           }
 
           Twilio.Device.connect(params);

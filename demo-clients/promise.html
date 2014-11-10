@@ -6,6 +6,7 @@
 
   <script src="../../platform/platform.js"></script>
   <script src="namesgenerator.js"></script>
+  <link rel="import" href="../../cachable-ajax/cachable-ajax.html">
   <link rel="import" href="../twilio-client.html">
 
   <link href="styles.css" type="text/css" rel="stylesheet" />
@@ -13,9 +14,8 @@
 </head>
 <body unresolved>
 
-<h3>Client Name</h3>
-<h4 id="clientName"></h4>
-<twilio-client autoInit capabilityTokenUrl="/capability"></twilio-client>
+<cachable-ajax url="/capability" params='{"clientName":"promiseClient"}' handleAs="text"></cachable-ajax>
+<twilio-client></twilio-client>
 
 <input class="number" type="text"
        placeholder="Enter a phone number to call"/>
@@ -34,12 +34,8 @@
 
 
 <script>
+  var ajax = document.querySelector('cachable-ajax');
   var client = document.querySelector('twilio-client');
-  var clientNameDiv = document.querySelector('#clientName');
-  var clientName = Utils.NamesGenerator();
-
-  clientNameDiv.innerHTML = clientName;
-  client.clientName = clientName;
 
   document.addEventListener('polymer-ready', function () {
     var callButton = document.querySelector('.call');
@@ -52,6 +48,10 @@
 
     hangUpButton.onclick = client.hangUp;
     anyKeyButton.onclick = client.anyKey;
+
+    var promise = ajax.go();
+    client.capabilityToken = promise;
+    client.init();
   });
 </script>
 </body>

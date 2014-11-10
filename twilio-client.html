@@ -92,10 +92,25 @@ and supports browser-to-browser calls.
          */
         available: [],
 
+        /**
+         * 'autoInit' If true, automatically performs component startup.
+         *
+         * @attribute autoInit
+         * @type boolean
+         * @default false
+         */
+        autoInit: false,
+
         ready: function () {
           cachableAjax.auto = false;
           self = this;
 
+          if(self.autoInit) {
+            self.init();
+          }
+        },
+
+        init: function () {
           if (self.capabilityToken) {
             Promise.resolve().then(function () { return self.capabilityToken; }).then(self.setupClient);
           } else if (self.capabilityTokenUrl) {

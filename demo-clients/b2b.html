@@ -15,7 +15,7 @@
 
 <h3>Client Name</h3>
 <h4 id="clientName"></h4>
-<twilio-client auto="true" capabilityTokenUrl="/capability"></twilio-client>
+<twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
 <input class="number" type="text"
        placeholder="Enter a phone number to call"/>
@@ -40,6 +40,7 @@
 
   clientNameDiv.innerHTML = clientName;
   client.clientName = clientName;
+  client.auto = true;
 
   document.addEventListener('polymer-ready', function () {
     var callButton = document.querySelector('.call');

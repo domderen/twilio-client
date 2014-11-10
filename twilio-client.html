@@ -125,10 +125,16 @@ and supports browser-to-browser calls.
         },
 
         init: function () {
+          if(self.initialized) {
+            throw new Error('Initialization already started. If it fails please try again.');
+          }
+
           if (self.capabilityToken) {
             Promise.resolve().then(function () { return self.capabilityToken; }).then(self.setupClient);
+            self.initialized = true;
           } else if (self.capabilityTokenUrl) {
             self.getToken().then(self.setupClient);
+            self.initialized = true;
           } else {
             throw new Error('No configuration parameters provided. Please provide either "capabilityToken" or ' +
             'the "capabilityTokenUrl". For further details, please consult the documentation.');
@@ -144,6 +150,7 @@ and supports browser-to-browser calls.
 
           Twilio.Device.error(function (error) {
             console.log('Error: ' + error.message);
+            self.initialized = false;
           });
 
           Twilio.Device.connect(function (conn) {

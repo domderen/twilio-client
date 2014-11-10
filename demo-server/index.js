@@ -39,12 +39,10 @@ nconf.save(function (err) {
 
 var app = express();
 
-app.use('/demo' + '/**/demo-server', function (req, res, next) {
+app.use('/**/demo-server', function (req, res, next) {
   res.status(403);
   res.send('<h1>403 Forbidden</h1>');
 });
-
-app.use('/demo', express.static(__dirname + '/../../'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -78,6 +76,8 @@ app.get('/', function (req, res) {
   res.set('Content-Type', 'text/xml');
   res.send(resp.toString());
 });
+
+app.use(express.static(__dirname + '/../../'));
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

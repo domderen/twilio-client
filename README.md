@@ -42,8 +42,12 @@ On a docker host machine, run command:
 
 ### 2) Running demo server as node application
  
-Go to the directory, where you have cloned this repo, and run commands:
+Open command line, and run following commands to start a web server with application:
  
+     mkdir polymer-components // First two commands are not mandatory, but are recommended, as by default bower is configured with "directory": "../".
+     cd polymer-components
+     git clone https://github.com/domderen/twilio-client.git
+     cd twilio-client
      npm install bower -g
      bower install
      cd demo-server
@@ -76,14 +80,22 @@ Finally, go to **Dashboard -> NUMBERS -> TWILIO NUMBERS** and edit one of your n
  
 Now you are ready to start using the twilio-client. Go to 
 
-    http://[your-application-host]:3000/demo/twilio-client/demo-clients/demo.html
+    http://[your-application-host]:3000/twilio-client/demo-clients/demo.html
 
 and 
 
-    http://[your-application-host]:3000/demo/twilio-client/demo-clients/demo-second-client.html
+    http://[your-application-host]:3000/twilio-client/demo-clients/demo-second-client.html
 
 in another browser window, to test browser-to-browser communication.
- 
+
+**Bear in mind, that "/twilio-client" part of URLs is the name of the directory, where you have have cloned this repo. If you cloned it to a directory different than 'twilio-client', you must update the paths to:
+
+    http://[your-application-host]:3000/[twilio-component-folder-name]/demo-clients/demo.html
+
+and
+
+    http://[your-application-host]:3000/[twilio-component-folder-name]/demo-clients/demo-second-client.html
+   
 To perform a call to other browser window, just type the name of the client of the other window, and press the 'Call' button.
  
 Enjoy!

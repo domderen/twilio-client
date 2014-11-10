@@ -7,8 +7,10 @@ RUN     yum install -y npm git
 
 RUN npm install bower -g
 
-# Bundle app source
-COPY . /src/twilio-client
+# Copy package management files, and download dependencies
+COPY ./.bowerrc /src/twilio-client/.bowerrc
+COPY ./bower.json /src/twilio-client/bower.json
+COPY ./demo-server/package.json /src/twilio-client/demo-server/package.json
 
 # Install client dependencies
 RUN cd /src/twilio-client; bower install --allow-root
@@ -16,6 +18,11 @@ RUN cd /src/twilio-client; bower install --allow-root
 # Install server dependencies
 RUN cd /src/twilio-client/demo-server; npm install
 
+# Bundle app source
+COPY . /src/twilio-client
+
+# Expose server port
 EXPOSE 3000
 
+# Default command to run, if building with config.json. Otherwise, please run this command with proper parameters.
 CMD ["node", "/src/twilio-client/demo-server/index.js"]

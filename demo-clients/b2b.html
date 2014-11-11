@@ -93,7 +93,10 @@
         peopleList.appendChild(newElement);
       } else {
         var elementToDelete = document.querySelector('#' + pres.from);
-        elementToDelete.parentNode.removeChild(elementToDelete);
+
+        if(elementToDelete) {
+          elementToDelete.parentNode.removeChild(elementToDelete);
+        }
       }
     });
   });

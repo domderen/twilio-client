@@ -105,8 +105,8 @@
           self = this;
 
           self.clientName = utils.namesgenerator();
-          self.twilioClient = this.shadowRoot.querySelector('twilio-client');
-          self.twilioClient.clientName = this.clientName;
+          self.twilioClient = self.shadowRoot.querySelector('twilio-client');
+          self.twilioClient.clientName = self.clientName;
           self.twilioClient.auto = true;
 
           // Set up event listeners for custom events.

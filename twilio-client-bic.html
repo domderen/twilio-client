@@ -13,9 +13,6 @@
 <link rel="import" href="../core-animated-pages/core-animated-pages.html">
 <link rel="import" href="twilio-client.html">
 
-
-<script src="utils/namesgenerator.js"></script>
-
 <polymer-element name="twilio-client-bic">
   <template>
     <link href="twilio-client-bic.css" type="text/css" rel="stylesheet"/>
@@ -25,42 +22,39 @@
 
     <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
-    <core-scaffold>
-      <core-toolbar tool flex>
-        <div flex>Browser Incoming Call</div>
-      </core-toolbar>
+    <div layout vertical center-center>
+      <h3>Browser Incoming Call</h3>
 
-      <div layout vertical center-center>
-        <div class="descriptionContainer">
-          <p>Demo presenting a functionality of aswering incoming calls in the browser.</p>
+      <div class="descriptionContainer">
+        <p>Demo presenting a functionality of aswering incoming calls in the browser.</p>
 
-          <p>After the component is ready to use, you can can the number connected with your Twilio application, and pick up the phone here.</p>
+        <p>After the component is ready to use, you can can the number connected with your Twilio application, and pick
+          up the phone here.</p>
 
-          <p>The call will be automatically picked up on incoming connection.</p>
+        <p>The call will be automatically picked up on incoming connection.</p>
 
-          <p>To hand up a call, press the 'Hang Up' button.</p>
+        <p>To hand up a call, press the 'Hang Up' button.</p>
 
-          <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
-            There is a button for this as well.</p>
+        <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
+          There is a button for this as well.</p>
 
-          <p>Phone Number: <strong>{{phoneNumber}}</strong></p>
-        </div>
-
-        <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
-          <paper-button raised on-click="{{hangUp}}">
-            <core-icon icon="cancel"></core-icon>
-            Hang Up
-          </paper-button>
-
-          <paper-button raised on-click="{{anyKey}}">
-            <core-icon icon="input"></core-icon>
-            Any Key
-          </paper-button>
-        </div>
-
-        <div id="log">{{log}}</div>
+        <p>Phone Number: <strong>{{phoneNumber}}</strong></p>
       </div>
-    </core-scaffold>
+
+      <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
+        <paper-button raised on-click="{{hangUp}}">
+          <core-icon icon="cancel"></core-icon>
+          Hang Up
+        </paper-button>
+
+        <paper-button raised on-click="{{anyKey}}">
+          <core-icon icon="input"></core-icon>
+          Any Key
+        </paper-button>
+      </div>
+
+      <div id="log">{{log}}</div>
+    </div>
   </template>
 
   <script>
@@ -72,12 +66,13 @@
 
         phoneNumber: '+48 12 881 08 40',
 
+        clientName: 'defaultClient',
+
         ready: function () {
           self = this;
 
-          self.clientName = 'defaultClient';
-          self.twilioClient = this.shadowRoot.querySelector('twilio-client');
-          self.twilioClient.clientName = this.clientName;
+          self.twilioClient = self.shadowRoot.querySelector('twilio-client');
+          self.twilioClient.clientName = self.clientName;
           self.twilioClient.auto = true;
 
           // Set up event listeners for custom events.

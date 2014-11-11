@@ -4,6 +4,7 @@ var fs = require('fs');
 var nconf = require('nconf');
 var twilio = require('twilio');
 var express = require ('express');
+var bodyParser = require('body-parser')
 
 var configFilePath = __dirname + '/config.json';
 
@@ -39,6 +40,11 @@ nconf.save(function (err) {
 
 var app = express();
 
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
 app.use('/**/demo-server', function (req, res, next) {
   res.status(403);
   res.send('<h1>403 Forbidden</h1>');
@@ -68,6 +74,25 @@ app.get('/', function (req, res) {
       node.number(req.query.PhoneNumber);
     } else if(req.query.ClientName) {
       node.client(req.query.ClientName);
+    } else {
+      node.client('someClient');
+    }
+  });
+
+  res.set('Content-Type', 'text/xml');
+  res.send(resp.toString());
+});
+
+app.post('/', function (req, res) {
+  var resp = new twilio.TwimlResponse();
+
+  resp.dial({
+    callerId: nconf.get('callerId')
+  }, function(node) {
+    if(req.body.PhoneNumber) {
+      node.number(req.body.PhoneNumber);
+    } else if(req.body.ClientName) {
+      node.client(req.body.ClientName);
     } else {
       node.client('someClient');
     }

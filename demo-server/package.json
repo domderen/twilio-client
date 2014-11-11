@@ -9,6 +9,7 @@
   "author": "Dominik Deren <dominik.deren@live.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.9.2",
     "express": "^4.10.1",
     "nconf": "^0.6.9",
     "twilio": "^1.7.0"

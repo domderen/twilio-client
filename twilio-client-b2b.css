@@ -238,4 +238,5 @@ button.anykey:active:before { background-position: 0 -88px; }
 
 .clientButton {
   background-color: white;
+  margin-top: 5px;
 }

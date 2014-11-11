@@ -70,8 +70,8 @@
           var promise = self.ajax.go();
           self.twilioClient = self.shadowRoot.querySelector('twilio-client');
           self.twilioClient.clientName = self.clientName;
-          client.capabilityToken = promise;
-          client.init();
+          self.twilioClient.capabilityToken = promise;
+          self.twilioClient.init();
 
           // Set up event listeners for custom events.
           self.twilioClient.addEventListener('device-ready', function () {

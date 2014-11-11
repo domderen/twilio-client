@@ -30,7 +30,6 @@
           <div class="usersList" layout vertical>
             <template repeat="{{pres in twilioClient.available}}">
               <paper-button class="clientButton" data-client-name="{{pres.from}}" raised on-click="{{callClient}}" disabled?="{{!pres.available}}">
-                <core-icon icon="account-circle"></core-icon>
                 {{pres.from}}
                 <core-icon icon="radio-button-on" class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
               </paper-button>
@@ -44,7 +43,6 @@
       </core-toolbar>
       <div layout horizontal center-center fit>
         <div flex layout vertical>
-          <core-image src="imgs/logo.png" self-center></core-image>
           <div class="descriptionContainer">
             <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
               demo, open two windows of the same page.</p>

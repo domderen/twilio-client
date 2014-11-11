@@ -52,7 +52,7 @@
     var anyKeyButton = document.querySelector('.anykey');
 
     // Attach actions to buttons.
-    pickUpButton.onclick client.acceptConnection;
+    pickUpButton.onclick = client.acceptConnection;
     hangUpButton.onclick = client.hangUp;
     anyKeyButton.onclick = client.anyKey;
 

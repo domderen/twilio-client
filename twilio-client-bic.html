@@ -75,7 +75,7 @@
         ready: function () {
           self = this;
 
-          self.clientName = utils.namesgenerator();
+          self.clientName = 'defaultClient';
           self.twilioClient = this.shadowRoot.querySelector('twilio-client');
           self.twilioClient.clientName = this.clientName;
           self.twilioClient.auto = true;

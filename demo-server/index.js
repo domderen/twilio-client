@@ -100,7 +100,7 @@ app.post('/', function (req, res) {
     } else if(req.body.ClientName) {
       node.client(req.body.ClientName);
     } else {
-      node.client('someClient');
+      node.client('defaultClient');
     }
   });
 

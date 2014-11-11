@@ -90,6 +90,9 @@
         var newElement = document.createElement('li');
         newElement.id = pres.from;
         newElement.innerText = pres.from;
+        newElement.onclick = function () {
+          client.call(newElement.id);
+        };
         peopleList.appendChild(newElement);
       } else {
         var elementToDelete = document.querySelector('#' + pres.from);

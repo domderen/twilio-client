@@ -37,8 +37,8 @@
 
     <div id="log">{{log}}</div>
 
-    <ul id="people">
-      <li repeat="pres in twilioClient.available" id="{{pres.from}}" class="{{ {hidden: !pres.available} | tokenList}}" on-click="{{twilioClient.call(pres.from)}}">
+    <ul id="people" repeat="{{pres in twilioClient.available}}">
+      <li class="{{ {hidden: !pres.available} | tokenList}}" on-click="{{twilioClient.call(pres.from)}}">
         {{pres.from}}
       </li>
     </ul>

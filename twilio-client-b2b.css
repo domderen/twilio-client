@@ -224,3 +224,7 @@ button.anykey:active:before { background-position: 0 -88px; }
   max-width: 1000px;
   margin: 0 auto;
 }
+
+.hidden {
+  display: none;
+}

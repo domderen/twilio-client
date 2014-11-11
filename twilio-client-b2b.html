@@ -20,65 +20,88 @@
   <template>
     <link href="twilio-client-b2b.css" type="text/css" rel="stylesheet"/>
 
+    <style>
+      core-icon-button {
+        color: white;
+      }
+    </style>
+
     <core-media-query query="max-width: 640px"
                       queryMatches="{{phoneScreen}}"></core-media-query>
     <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
-    <div layout vertical center-center>
-      <div class="descriptionContainer">
-        <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
-          demo, open two windows of the same page.</p>
+    <core-scaffold>
+      <nav>
+        <core-toolbar>
+          <span>Clients list</span>
+        </core-toolbar>
+        <core-menu>
+          <div class="usersList" layout vertical>
+            <template repeat="{{pres in twilioClient.available}}">
+              <paper-button class="clientButton" data-client-name="{{pres.from}}" raised on-click="{{callClient}}"
+                            disabled?="{{!pres.available}}">
+                {{pres.from}}
+                <core-icon icon="radio-button-on"
+                           class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
+              </paper-button>
+            </template>
+          </div>
+        </core-menu>
+      </nav>
 
-        <p>Each page will generate its own unique client name. The name of this client is displayed below. On the
-          right
-          hand side, is a list of available clients.</p>
+      <core-toolbar tool flex>
+        <a href="demo.html">
+          <core-icon-button icon="arrow-back">Go Back</core-icon-button>
+        </a>
+      </core-toolbar>
 
-        <p>If any other client will be available, it will be presented in that list. Just click on the client name to
-          make
-          a connection to this client.</p>
+      <div layout vertical center-center>
+        <h3>Browser to Browser</h3>
 
-        <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick
-          Up'
-          button.</p>
+        <div class="descriptionContainer">
+          <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
+            demo, open two windows of the same page.</p>
 
-        <p>To hand up a call, press the 'Hang Up' button.</p>
+          <p>Each page will generate its own unique client name. The name of this client is displayed below. On the
+            right
+            hand side, is a list of available clients.</p>
 
-        <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
-          There is a button for this as well.</p>
+          <p>If any other client will be available, it will be presented in that list. Just click on the client name to
+            make
+            a connection to this client.</p>
 
-        <p>Client Name: <strong>{{clientName}}</strong></p>
-      </div>
+          <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick
+            Up'
+            button.</p>
 
-      <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
-        <paper-button raised on-click="{{pickUp}}">
-          <core-icon icon="perm-phone-msg"></core-icon>
-          Pick Up
-        </paper-button>
+          <p>To hand up a call, press the 'Hang Up' button.</p>
 
-        <paper-button raised on-click="{{hangUp}}">
-          <core-icon icon="cancel"></core-icon>
-          Hang Up
-        </paper-button>
+          <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
+            There is a button for this as well.</p>
 
-        <paper-button raised on-click="{{anyKey}}">
-          <core-icon icon="input"></core-icon>
-          Any Key
-        </paper-button>
-      </div>
+          <p>Client Name: <strong>{{clientName}}</strong></p>
+        </div>
 
-      <div id="log">{{log}}</div>
-
-      <div layout vertical>
-        <template repeat="{{pres in twilioClient.available}}">
-          <paper-button class="clientButton" data-client-name="{{pres.from}}" raised on-click="{{callClient}}"
-                        disabled?="{{!pres.available}}">
-            {{pres.from}}
-            <core-icon icon="radio-button-on"
-                       class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
+        <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
+          <paper-button raised on-click="{{pickUp}}">
+            <core-icon icon="perm-phone-msg"></core-icon>
+            Pick Up
           </paper-button>
-        </template>
+
+          <paper-button raised on-click="{{hangUp}}">
+            <core-icon icon="cancel"></core-icon>
+            Hang Up
+          </paper-button>
+
+          <paper-button raised on-click="{{anyKey}}">
+            <core-icon icon="input"></core-icon>
+            Any Key
+          </paper-button>
+        </div>
+
+        <div id="log">{{log}}</div>
       </div>
-    </div>
+    </core-scaffold>
   </template>
 
   <script>

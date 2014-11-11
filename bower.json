@@ -33,7 +33,7 @@
     "es6-promise-polyfill": "~1.0.0",
     "lodash": "~2.4.1",
     "cachable-ajax": "~0.3.1",
-    "twilioclient-fixed": "~1.2.3",
+    "twilioclient-fixed": "~1.2.4",
     "paper-button": "Polymer/paper-button#~0.4.2",
     "core-drawer-panel": "Polymer/core-drawer-panel#~0.4.2",
     "core-header-panel": "Polymer/core-header-panel#~0.4.2",
@@ -44,8 +44,6 @@
     "core-image": "Polymer/core-image#~0.4.2",
     "core-animated-pages": "Polymer/core-animated-pages#~0.4.2",
     "paper-item": "Polymer/paper-item#~0.4.2",
-    "flatiron-director": "Polymer/flatiron-director#~0.4.0",
-    "core-a11y-keys": "Polymer/core-a11y-keys#~0.4.2",
     "paper-input": "Polymer/paper-input#~0.4.2"
   },
   "devDependencies": {

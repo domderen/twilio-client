@@ -1,0 +1,35 @@
+body {
+  font-family: "RobotoDraft";
+  font-weight: 300;
+}
+
+#log {
+  background: #404040;
+  padding: 10px;
+  margin: 25px auto 0 auto;
+  border: 1px solid #d4d4d4;
+  text-decoration: none;
+  font:18px/normal sans-serif;
+  color: white;
+  outline: none;
+  background-color: #404040;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(#404040));
+  background-image: -moz-linear-gradient(#000, #404040);
+  background-image: -o-linear-gradient(#000, #404040);
+  background-image: linear-gradient(#000, #404040);
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  -o-background-clip: padding-box;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  line-height: 25px;
+  border-radius: 5px;
+  /* IE hacks */
+  zoom: 1;
+  *display: inline;
+}
+
+.descriptionContainer {
+  text-align: center;
+  padding: 0 5px;
+}

@@ -7,15 +7,12 @@ core-animated-pages {
   width: 85%;
   height: 85%;
   -webkit-user-select: none;
-}
-
-core-animated-pages section {
-  padding: 0 10px;
+  text-align: center;
 }
 
 core-animated-pages > * {
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 30px;
   background-color: white;
 }
 

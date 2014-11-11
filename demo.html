@@ -4,14 +4,13 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>twilio-client Demo</title>
 
-  <script src="../../platform/platform.js"></script>
+  <script src="../platform/platform.js"></script>
   <link rel="import" href="../core-scaffold/core-scaffold.html">
   <link rel="import" href="../core-toolbar/core-toolbar.html">
   <link rel="import" href="../core-menu/core-menu.html">
   <link rel="import" href="../paper-item/paper-item.html">
   <link rel="import" href="../core-animated-pages/core-animated-pages.html">
   <link rel="import" href="../core-animated-pages/transitions/slide-from-right.html">
-  <link rel="import" href="../flatiron-director/flatiron-director.html">
   <link rel="import" href="../core-ajax/core-ajax.html">
 
   <link rel="stylesheet" href="demo.css" shim-shadowdom>
@@ -19,32 +18,15 @@
 <body unresolved fullbleed>
 
 <template is="auto-binding" id="t">
-
-  <!-- Route controller. -->
-  <flatiron-director route="{{route}}" autoHash></flatiron-director>
-
-  <!-- Keyboard nav controller. -->
-  <core-a11y-keys id="keys" target="{{parentElement}}"
-                  keys="up down left right space space+shift"
-                  on-keys-pressed="{{keyHandler}}"></core-a11y-keys>
-
-  <!-- Dynamic content controller -->
-  <core-ajax id="ajax" url="{{selectedPage.page.url}}" handleAs="document"
-             on-core-response="{{onResponse}}"></core-ajax>
-
   <core-scaffold id="scaffold">
-
     <nav>
       <core-toolbar>
         <span>Twilio Client</span>
       </core-toolbar>
-      <core-menu id="menu" valueattr="hash"
-                 selected="{{route}}"
-                 selectedModel="{{selectedPage}}"
-                 on-core-select="{{menuItemSelected}}" on-click="{{ajaxLoad}}">
+      <core-menu id="menu">
         <template repeat="{{page, i in pages}}">
           <paper-item icon="label{{route != page.hash ? '-outline' : ''}}"
-                      label="{{page.name}}" hash="{{page.hash}}">
+                      label="{{page.name}}">
             <a href="{{page.url}}"></a>
           </paper-item>
         </template>
@@ -52,18 +34,17 @@
     </nav>
 
     <core-toolbar tool flex>
-      <div flex>{{selectedPage.page.name}}</div>
-      <core-icon-button icon="refresh" on-tap="{{cleanPages}}"></core-icon-button>
+      <div flex>Demo Selector</div>
     </core-toolbar>
 
-    <div layout horizontal center-center>
-      <core-animated-pages id="pages" selected="{{route}}" valueattr="hash"
-                           transitions="slide-from-right">
-        <template repeat="{{page, i in pages}}">
-          <section hash="{{page.hash}}" layout vertical center-center>
-            <div style="max-width:100%;">Loading...</div>
-          </section>
-        </template>
+    <div layout horizontal center-center fit>
+      <core-animated-pages>
+        <section layout vertical center-center>
+          <div>
+            <p>Please select a demo application from the left hand side menu.</p>
+            <p>On mobile, you can swipe to open the menu.</p>
+          </div>
+        </section>
       </core-animated-pages>
     </div>
 
@@ -75,91 +56,14 @@
   (function () {
     "use strict";
 
-    var DEFAULT_ROUTE = 'one';
-
     var template = document.querySelector('#t');
-    var ajax, pages, scaffold;
 
     template.pages = [
-      {name: 'Incoming call', hash: 'bic', url: 'bic-demo.html'},
-      {name: 'Outgoing call', hash: 'boc', url: 'boc-demo.html'},
-      {name: 'Browser to Browser', hash: 'b2b', url: 'b2b-demo.html'}
+      {name: 'Incoming call', url: 'bic-demo.html'},
+      {name: 'Outgoing call', url: 'boc-demo.html'},
+      {name: 'Browser to Browser', url: 'b2b-demo.html'},
+      {name: 'Promise demo', url: 'promise-demo.html'}
     ];
-
-    template.addEventListener('template-bound', function (e) {
-      scaffold = document.querySelector('#scaffold');
-      ajax = document.querySelector('#ajax');
-      pages = document.querySelector('#pages');
-      var keys = document.querySelector('#keys');
-
-      // Allow selecting pages by num keypad. Dynamically add
-      // [1, template.pages.length] to key mappings.
-      var keysToAdd = Array.apply(null, template.pages).map(function (x, i) {
-        return i + 1;
-      }).reduce(function (x, y) {
-        return x + ' ' + y;
-      });
-      keys.keys += ' ' + keysToAdd;
-
-      this.route = this.route || DEFAULT_ROUTE; // Select initial route.
-    });
-
-    template.keyHandler = function (e, detail, sender) {
-      // Select page by num key.
-      var num = parseInt(detail.key);
-      if (!isNaN(num) && num <= this.pages.length) {
-        pages.selectIndex(num - 1);
-        return;
-      }
-
-      switch (detail.key) {
-        case 'left':
-        case 'up':
-          pages.selectPrevious();
-          break;
-        case 'right':
-        case 'down':
-          pages.selectNext();
-          break;
-        case 'space':
-          detail.shift ? pages.selectPrevious() : pages.selectNext();
-          break;
-      }
-    };
-
-    template.menuItemSelected = function (e, detail, sender) {
-      if (detail.isSelected) {
-
-        // Need to wait one rAF so <core-ajax> has it's URL set.
-        this.async(function () {
-          ajax.go();
-          scaffold.closeDrawer();
-        });
-
-      }
-    };
-
-    template.ajaxLoad = function (e, detail, sender) {
-      e.preventDefault(); // prevent link navigation.
-    };
-
-    template.onResponse = function (e, detail, sender) {
-      var article = detail.response;
-      var html = article.querySelector('article').innerHTML;
-
-      template.cleanPages();
-
-      this.injectBoundHTML(html, pages.selectedItem.firstElementChild);
-    };
-
-    template.cleanPages = function () {
-      var allPages = pages.querySelectorAll('section');
-
-      for(var i = 0; i < allPages.length; i++) {
-        document.querySelector('#pages').querySelectorAll('section')[i].firstElementChild.innerHTML = "";
-      }
-    }
-
   })();
 </script>
 

@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>Browser Incomming Call</title>
+  <title>Browser Outgoing Call</title>
 
   <script src="../platform/platform.js"></script>
 
   <link rel="import" href="../core-toolbar/core-toolbar.html">
   <link rel="import" href="../core-header-panel/core-header-panel.html">
   <link rel="import" href="../core-icon-button/core-icon-button.html">
-  <link rel="import" href="twilio-client-b2b.html">
+  <link rel="import" href="twilio-client-promise.html">
 
   <link rel="stylesheet" href="demo.css" shim-shadowdom>
 
@@ -23,12 +23,20 @@
       background-color: #eee;
     }
 
-
+    core-icon-button {
+      color: white;
+    }
   </style>
 </head>
 <body unresolved fullbleed>
-<twilio-client-b2b></twilio-client-b2b>
+<core-header-panel id="headerPanel" main mode="scroll">
+  <core-toolbar>
+    <a href="demo.html">
+      <core-icon-button icon="arrow-back">Go Back</core-icon-button>
+    </a>
+  </core-toolbar>
+  <twilio-client-promise></twilio-client-promise>
+</core-header-panel>
 
 </body>
 </html>
-

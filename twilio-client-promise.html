@@ -1,58 +1,110 @@
-<!doctype html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>twilio-client Demo</title>
+<link rel="import" href="../polymer/polymer.html">
+<link href="../font-roboto/roboto.html" rel="import">
+<link href="../core-icon/core-icon.html" rel="import">
+<link href="../core-icons/core-icons.html" rel="import">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../core-header-panel/core-header-panel.html">
+<link rel="import" href="../core-toolbar/core-toolbar.html">
+<link rel="import" href="../core-icon-button/core-icon-button.html">
+<link rel="import" href="../core-menu/core-menu.html">
+<link rel="import" href="../core-scaffold/core-scaffold.html">
+<link rel="import" href="../core-image/core-image.html">
+<link rel="import" href="../core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../cachable-ajax/cachable-ajax.html">
+<link rel="import" href="twilio-client.html">
 
-  <script src="../platform/platform.js"></script>
-  <script src="utils/namesgenerator.js"></script>
-  <link rel="import" href="../cachable-ajax/cachable-ajax.html">
-  <link rel="import" href="twilio-client.html">
+<polymer-element name="twilio-client-promise">
+  <template>
+    <link href="twilio-client-promise.css" type="text/css" rel="stylesheet"/>
 
-  <link href="twilio-client-b2b.css" type="text/css" rel="stylesheet" />
+    <core-media-query query="max-width: 640px"
+                      queryMatches="{{phoneScreen}}"></core-media-query>
 
-</head>
-<body unresolved>
+    <cachable-ajax url="/capability" params='{"clientName":"promiseClient"}' handleAs="text"></cachable-ajax>
+    <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
-<cachable-ajax url="/capability" params='{"clientName":"promiseClient"}' handleAs="text"></cachable-ajax>
-<twilio-client></twilio-client>
+    <div layout vertical center-center>
+      <h3>Capability Token Promise</h3>
 
-<input class="number" type="text"
-       placeholder="Enter a phone number to call"/>
+      <div class="descriptionContainer">
+        <p>This is a demo of passing the capablityToken to the element, as a promise. This demo behaves the same way
+        as the <a href="bic-demo.html">Browser Incoming Call</a> demo. The difference here, is the code implementation
+        where the capabilityToken is passed to the component as a promise, to be resolved. This presents
+        the possibility of using the twilio-client as a library rather then component. Similarly to core-ajax,
+        twilio-client can also be used as a component without any template, purley as a functional library.</p>
+      </div>
 
-<button class="call" on-click="{{call}}">
-  Call
-</button>
+      <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
+        <paper-button raised on-click="{{hangUp}}">
+          <core-icon icon="cancel"></core-icon>
+          Hang Up
+        </paper-button>
 
-<button class="hangup" on-click="{{hangUp}}">
-  Hang Up
-</button>
+        <paper-button raised on-click="{{anyKey}}">
+          <core-icon icon="input"></core-icon>
+          Any Key
+        </paper-button>
+      </div>
 
-<button class="anykey" on-click="{{anyKey}}">
-  Any Key
-</button>
+      <div id="log">{{log}}</div>
+    </div>
+  </template>
 
+  <script>
+    (function () {
 
-<script>
-  var ajax = document.querySelector('cachable-ajax');
-  var client = document.querySelector('twilio-client');
+      var self;
 
-  document.addEventListener('polymer-ready', function () {
-    var callButton = document.querySelector('.call');
-    var hangUpButton = document.querySelector('.hangup');
-    var anyKeyButton = document.querySelector('.anykey');
-    callButton.onclick = function () {
-      var number = document.querySelector('.number').value;
-      client.call(number);
-    };
+      Polymer({
+        log: 'Loading pigeons...',
 
-    hangUpButton.onclick = client.hangUp;
-    anyKeyButton.onclick = client.anyKey;
+        phoneNumber: '+48 12 881 08 40',
 
-    var promise = ajax.go();
-    client.capabilityToken = promise;
-    client.init();
-  });
-</script>
-</body>
-</html>
+        clientName: 'defaultClient',
+
+        ready: function () {
+          self = this;
+
+          self.ajax = self.shadowRoot.querySelector('cachable-ajax');
+          var promise = self.ajax.go();
+          self.twilioClient = self.shadowRoot.querySelector('twilio-client');
+          self.twilioClient.clientName = self.clientName;
+          client.capabilityToken = promise;
+          client.init();
+
+          // Set up event listeners for custom events.
+          self.twilioClient.addEventListener('device-ready', function () {
+            self.log = "Ready";
+          });
+
+          self.twilioClient.addEventListener('device-error', function (e) {
+            self.log = "Error: " + e.detail.error.message;
+          });
+
+          self.twilioClient.addEventListener('device-connect', function () {
+            self.log = "Successfully established call";
+          });
+
+          self.twilioClient.addEventListener('device-disconnect', function () {
+            self.log = "Call ended";
+          });
+
+          self.twilioClient.addEventListener('device-incoming', function (e) {
+            self.log = "Incoming connection from " + e.detail.connection.parameters.From;
+            self.twilioClient.acceptConnection();
+          });
+        },
+
+        hangUp: function () {
+          self.twilioClient.hangUp();
+        },
+
+        anyKey: function () {
+          self.twilioClient.anyKey();
+        }
+      });
+    })();
+  </script>
+</polymer-element>
+

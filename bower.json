@@ -34,7 +34,8 @@
     "lodash": "~2.4.1",
     "cachable-ajax": "~0.3.1",
     "twilioclient-fixed": "~1.2.2",
-    "paper-button": "Polymer/paper-button#~0.5.0"
+    "paper-button": "Polymer/paper-button#~0.5.0",
+    "core-drawer-panel": "Polymer/core-drawer-panel#~0.5.0"
   },
   "devDependencies": {
     "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.2"

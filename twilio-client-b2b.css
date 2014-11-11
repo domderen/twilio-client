@@ -223,3 +223,11 @@ button.anykey:active:before { background-position: 0 -88px; }
 .descriptionContainer {
   text-align: center;
 }
+
+.green {
+  color:green;
+}
+
+.grey {
+  color:#808080;
+}

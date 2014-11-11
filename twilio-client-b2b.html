@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="twilio-client.html">
+<link rel="import" href="../core-icon/core-icon.html">
+<link rel="import" href="../paper-button/paper-button.html">
 
 <script src="utils/namesgenerator.js"></script>
 
@@ -35,17 +37,23 @@
           <p>Client Name: <strong>{{clientName}}</strong></p>
 
         </div>
-        <button class="call" on-click="{{twilioClient.acceptConnection}}">
-          Pick Up
-        </button>
 
-        <button class="hangup" on-click="{{twilioClient.hangUp}}">
-          Hang Up
-        </button>
+        <div layout vertical>
+          <paper-button on-tap="{{twilioClient.acceptConnection}}">
+            <core-icon icon="perm-phone-msg"></core-icon>
+            Pick Up
+          </paper-button>
 
-        <button class="anykey" on-click="{{twilioClient.anyKey}}">
-          Any Key
-        </button>
+          <paper-button on-tap="{{twilioClient.hangUp}}">
+            <core-icon icon="cancel"></core-icon>
+            Hang Up
+          </paper-button>
+
+          <paper-button on-tap="{{twilioClient.anyKey}}">
+            <core-icon icon="input"></core-icon>
+            Any Key
+          </paper-button>
+        </div>
 
         <div id="log">{{log}}</div>
       </div>

@@ -221,10 +221,5 @@ button.anykey:focus:before,
 button.anykey:active:before { background-position: 0 -88px; }
 
 .descriptionContainer {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.hidden {
-  display: none;
+  text-align: center;
 }

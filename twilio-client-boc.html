@@ -13,9 +13,9 @@
 <link rel="import" href="../core-animated-pages/core-animated-pages.html">
 <link rel="import" href="twilio-client.html">
 
-<polymer-element name="twilio-client-bic">
+<polymer-element name="twilio-client-boc">
   <template>
-    <link href="twilio-client-bic.css" type="text/css" rel="stylesheet"/>
+    <link href="twilio-client-boc.css" type="text/css" rel="stylesheet"/>
 
     <core-media-query query="max-width: 640px"
                       queryMatches="{{phoneScreen}}"></core-media-query>
@@ -23,25 +23,30 @@
     <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
     <div layout vertical center-center>
-      <h3>Browser Incoming Call</h3>
+      <h3>Browser Outgoing Call</h3>
 
       <div class="descriptionContainer">
-        <p>Demo presenting a functionality of answering incoming calls in the browser.</p>
+        <p>Demo presenting a functionality of initiating outgoing calls from the browser.</p>
 
-        <p>After the component is ready to use, you can call the number connected with your Twilio application, and pick
-          up the phone here.</p>
+        <p>After the component is ready to use, you can connect with any telephone number supported by your Twilio
+          application.</p>
 
-        <p>The call will be automatically picked up on incoming connection.</p>
+        <p>To call a selected number, first input the number, and next press the 'Call' button.</p>
 
         <p>To hand up a call, press the 'Hang Up' button.</p>
 
         <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
           There is a button for this as well.</p>
-
-        <p>Phone Number: <strong>{{phoneNumber}}</strong></p>
       </div>
 
+      <paper-input label="Phone number" floatingLabel="true" value="{{phoneNumber}}"></paper-input>
+
       <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
+        <paper-button raised on-click="{{pickUp}}">
+          <core-icon icon="perm-phone-msg"></core-icon>
+          Call
+        </paper-button>
+
         <paper-button raised on-click="{{hangUp}}">
           <core-icon icon="cancel"></core-icon>
           Hang Up
@@ -64,7 +69,7 @@
       Polymer({
         log: 'Loading pigeons...',
 
-        phoneNumber: '+48 12 881 08 40',
+        phoneNumber: '',
 
         clientName: 'defaultClient',
 
@@ -96,6 +101,10 @@
             self.log = "Incoming connection from " + e.detail.connection.parameters.From;
             self.twilioClient.acceptConnection();
           });
+        },
+
+        call: function () {
+          self.twilioClient.call(self.phoneNumber);
         },
 
         hangUp: function () {

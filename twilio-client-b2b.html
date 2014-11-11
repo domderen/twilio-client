@@ -28,7 +28,7 @@
         <core-menu>
           <div class="usersList" layout vertical>
             <template repeat="{{pres in twilioClient.available}}">
-              <paper-button class="clientButton" raised on-click="{{twilioClient.call(pres.from)}}" disabled?="{{!pres.available}}">
+              <paper-button class="clientButton" raised on-tap="{{twilioClient.call(pres.from)}}" disabled?="{{!pres.available}}">
                 <core-icon icon="account-circle"></core-icon>
                 {{pres.from}}
                 <core-icon icon="radio-button-on" class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
@@ -66,17 +66,17 @@
           </div>
 
           <div layout horizontal center-justified>
-            <paper-button raised on-click="{{twilioClient.acceptConnection}}">
+            <paper-button raised on-tap="{{twilioClient.acceptConnection}}">
               <core-icon icon="perm-phone-msg"></core-icon>
               Pick Up
             </paper-button>
 
-            <paper-button raised on-click="{{twilioClient.hangUp}}">
+            <paper-button raised on-tap="{{twilioClient.hangUp}}">
               <core-icon icon="cancel"></core-icon>
               Hang Up
             </paper-button>
 
-            <paper-button raised on-click="{{twilioClient.anyKey}}">
+            <paper-button raised on-tap="{{twilioClient.anyKey}}">
               <core-icon icon="input"></core-icon>
               Any Key
             </paper-button>

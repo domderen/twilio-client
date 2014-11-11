@@ -232,13 +232,9 @@ button.anykey:active:before { background-position: 0 -88px; }
   color:#808080;
 }
 
-.usersList {
-  background-color: red;
-}
-
 .clientButton {
-  background-color: white;
-  margin-top: 5px;
+  background-color: wheat;
+  margin-bottom: 5px;
 }
 
 

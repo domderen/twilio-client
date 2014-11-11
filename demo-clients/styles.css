@@ -220,10 +220,6 @@ button.anykey:hover:before,
 button.anykey:focus:before,
 button.anykey:active:before { background-position: 0 -88px; }
 
-.logo {
-  margin-top: 20px;
-}
-
 .descriptionContainer {
   max-width: 1000px;
   margin: 0 auto;

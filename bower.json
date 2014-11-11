@@ -4,8 +4,30 @@
   "keywords": [
     "seed",
     "polymer",
-    "web-components"
+    "web-components",
+    "twilio",
+    "calls",
+    "browser-call",
+    "websocket",
+    "peer-to-peer",
+    "p2p"
   ],
+  "ignore": [
+    "./utils/*",
+    "./demo-server/*",
+    "./demo-clients/*",
+    "./.dockerignore",
+    "./.editorconfig",
+    "./.gitattributes",
+    "./.git",
+    "./.gitignore",
+    "./.jshintrc",
+    "./demo.html",
+    "./Dockerfile",
+    "./index.html",
+    "./LICENSE"
+  ],
+
   "main": "twilio-client.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^0.4.2",

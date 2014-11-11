@@ -72,8 +72,8 @@ var left = [ "happy", "jolly", "dreamy", "sad", "angry",
 (function (win) {
   'use strict';
 
-  if(!win.Utils) {
-    win.Utils = {};
+  if(!win.utils) {
+    win.utils = {};
   }
 
   /**
@@ -81,7 +81,7 @@ var left = [ "happy", "jolly", "dreamy", "sad", "angry",
    *
    * @return {string} Generated name.
    */
-  Utils.NamesGenerator = function () {
+  utils.namesgenerator = function () {
     function randnum(n) {
       var min = 0
         , max = n;

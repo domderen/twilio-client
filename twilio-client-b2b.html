@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="twilio-client.html">
+
+<script src="utils/namesgenerator.js"></script>
+
+<polymer-element name="twilio-client-b2b">
+  <template>
+    <link href="twilio-client-b2b.css" type="text/css" rel="stylesheet" />
+
+    <twilio-client capabilityTokenUrl="/capability"></twilio-client>
+
+    <img src="imgs/logo.png" alt="logo" class="logo"/>
+
+    <div class="descriptionContainer">
+      <h2>Browser-to-Browser</h2>
+      <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this demo, open two windows of the same page.</p>
+      <p>Each page will generate its own unique client name. The name of this client is displayed below. On the right hand side, is a list of available clients.</p>
+      <p>If any other client will be available, it will be presented in that list. Just click on the client name to make a connection to this client.</p>
+      <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick Up' button.</p>
+      <p>To hand up a call, press the 'Hang Up' button.</p>
+      <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call. There is a button for this as well.</p>
+
+      <p>Client Name: <strong>{{clientName}}</strong></p>
+
+    </div>
+    <button class="call" on-click="{{twilioClient.acceptConnection}}">
+      Pick Up
+    </button>
+
+    <button class="hangup" on-click="{{twilioClient.hangUp}}">
+      Hang Up
+    </button>
+
+    <button class="anykey" on-click="{{twilioClient.anyKey}}">
+      Any Key
+    </button>
+
+    <div id="log">{{log}}</div>
+
+    <ul id="people">
+      <li repeat="pres in twilioClient.available" id="{{pres.from}}" class="{{ {hidden: !pres.available} | tokenList}}" on-click="{{twilioClient.call(pres.from)}}">
+        {{pres.from}}
+      </li>
+    </ul>
+  </template>
+
+  <script>
+    (function () {
+      var self;
+
+      Polymer({
+        log: 'Loading pigeons...',
+
+        ready: function () {
+          self = this;
+
+          self.clientName = utils.namesgenerator();
+          self.twilioClient = this.shadowRoot.querySelector(twilio-client);
+          self.twilioClient.clientName = this.clientName;
+          self.twilioClient.auto = true;
+
+          // Set up event listeners for custom events.
+          client.addEventListener('device-ready', function () {
+            self.log = "Ready";
+          });
+
+          client.addEventListener('device-error', function (e) {
+            self.log = "Error: " + e.detail.error.message;
+          });
+
+          client.addEventListener('device-connect', function () {
+            self.log = "Successfully established call";
+          });
+
+          client.addEventListener('device-disconnect', function () {
+            self.log = "Call ended";
+          });
+
+          client.addEventListener('device-incoming', function (e) {
+            self.log = "Incoming connection from " + e.detail.connection.parameters.From;
+          });
+        }
+      });
+    })();
+  </script>
+</polymer-element>

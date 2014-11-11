@@ -40,7 +40,8 @@
     "core-toolbar": "Polymer/core-toolbar#~0.4.2",
     "core-icon-button": "Polymer/core-icon-button#~0.4.2",
     "core-menu": "Polymer/core-menu#~0.5.0",
-    "core-scaffold": "Polymer/core-scaffold#~0.5.0"
+    "core-scaffold": "Polymer/core-scaffold#~0.5.0",
+    "core-image": "Polymer/core-image#~0.5.0"
   },
   "devDependencies": {
     "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.2"

@@ -9,6 +9,7 @@
 <link rel="import" href="../core-icon-button/core-icon-button.html">
 <link rel="import" href="../core-menu/core-menu.html">
 <link rel="import" href="../core-scaffold/core-scaffold.html">
+<link rel="import" href="../core-image/core-image.html">
 <link rel="import" href="twilio-client.html">
 
 
@@ -38,12 +39,13 @@
         </core-menu>
       </nav>
 
+      <core-toolbar>
+        <span>Browser-to-Browser</span>
+      </core-toolbar>
       <div layout horizontal center-center fit>
         <div flex layout vertical>
-          <img src="imgs/logo.png" alt="logo" class="logo" self-center/>
+          <core-image src="imgs/logo.png" self-center></core-image>
           <div class="descriptionContainer">
-            <h2>Browser-to-Browser</h2>
-
             <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
               demo, open two windows of the same page.</p>
 
@@ -62,7 +64,6 @@
               There is a button for this as well.</p>
 
             <p>Client Name: <strong>{{clientName}}</strong></p>
-
           </div>
 
           <div layout horizontal center-justified>

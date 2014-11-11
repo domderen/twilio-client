@@ -38,14 +38,16 @@
     "core-drawer-panel": "Polymer/core-drawer-panel#~0.4.2",
     "core-header-panel": "Polymer/core-header-panel#~0.4.2",
     "core-toolbar": "Polymer/core-toolbar#~0.4.2",
-    "core-icon-button": "Polymer/core-icon-button#~0.4.2"
+    "core-icon-button": "Polymer/core-icon-button#~0.4.2",
+    "core-menu": "Polymer/core-menu#~0.5.0",
+    "core-scaffold": "Polymer/core-scaffold#~0.5.0"
   },
   "devDependencies": {
     "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.2"
   },
   "resolutions": {
     "core-component-page": "^0.4.0",
-    "polymer": "^0.4.0",
+    "polymer": "^0.4.2",
     "core-icon": "^0.4.0",
     "core-iconset": "^0.4.0",
     "core-meta": "^0.4.0",
@@ -56,6 +58,10 @@
     "paper-shadow": "^0.4.0",
     "core-selector": "^0.4.0",
     "core-selection": "^0.4.0",
-    "core-media-query": "^0.4.0"
+    "core-media-query": "^0.4.0",
+    "core-icon-button": "~0.4.2",
+    "core-drawer-panel": "~0.4.2",
+    "core-header-panel": "~0.4.2",
+    "core-toolbar": "~0.4.2"
   }
 }

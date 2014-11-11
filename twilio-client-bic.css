@@ -4,17 +4,13 @@ body {
 }
 
 #log {
-  width: 466px;
-  height: 25px;
   background: #404040;
   padding: 10px;
-  /*margin-left: -243px;*/
   margin: 25px auto 0 auto;
   border: 1px solid #d4d4d4;
   text-decoration: none;
   font:18px/normal sans-serif;
   color: white;
-  white-space: nowrap;
   outline: none;
   background-color: #404040;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(#404040));
@@ -24,7 +20,6 @@ body {
   -webkit-background-clip: padding;
   -moz-background-clip: padding;
   -o-background-clip: padding-box;
-  /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   line-height: 25px;
@@ -37,55 +32,4 @@ body {
 .descriptionContainer {
   text-align: center;
   padding: 0 5px;
-}
-
-.green {
-  color:green;
-}
-
-.grey {
-  color:#808080;
-}
-
-.clientButton {
-  background-color: wheat;
-  margin-bottom: 5px;
-}
-
-core-animated-pages {
-  width: 85%;
-  height: 85%;
-  -webkit-user-select: none;
-  overflow: hidden;
-}
-
-core-animated-pages > * {
-  border-radius: 5px;
-  font-size: 50px;
-  background-color: white;
-}
-
-body /deep/ core-toolbar {
-  background-color: #03a9f4;
-  color: #fff;
-}
-
-core-menu {
-  color: #01579b;
-  margin: 10px 0 0 0;
-}
-
-core-menu > paper-item {
-  transition: all 300ms ease-in-out;
-}
-
-core-menu > paper-item.core-selected {
-  background: #e1f5fe;
-}
-
-@media all and (max-width: 480px) {
-  core-animated-pages {
-    width: 100%;
-    height: 100%;
-  }
 }

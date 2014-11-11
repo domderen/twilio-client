@@ -21,7 +21,7 @@
     <core-media-query query="max-width: 640px"
                       queryMatches="{{phoneScreen}}"></core-media-query>
 
-    <cachable-ajax url="/capability" params='{"clientName":"promiseClient"}' handleAs="text"></cachable-ajax>
+    <cachable-ajax url="/capability" params='{"clientName":"{{clientName}}"}' handleAs="text"></cachable-ajax>
     <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
     <div layout vertical center-center>

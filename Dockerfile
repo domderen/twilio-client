@@ -9,16 +9,18 @@ RUN     yum install -y npm git
 # Install bower package manager globally
 RUN npm install bower -g
 
-# Copy package management files, and download dependencies
-COPY ./.bowerrc /src/twilio-client/.bowerrc
-COPY ./bower.json /src/twilio-client/bower.json
+# Copy server package management files, and download dependencies
 COPY ./demo-server/package.json /src/twilio-client/demo-server/package.json
-
-# Install client dependencies
-RUN cd /src/twilio-client; bower install --allow-root
 
 # Install server dependencies
 RUN cd /src/twilio-client/demo-server; npm install
+
+# Copy client package management files, and download dependencies
+COPY ./.bowerrc /src/twilio-client/.bowerrc
+COPY ./bower.json /src/twilio-client/bower.json
+
+# Install client dependencies
+RUN cd /src/twilio-client; bower install --allow-root
 
 # Bundle app source
 COPY . /src/twilio-client

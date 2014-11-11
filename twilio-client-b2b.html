@@ -1,9 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="twilio-client.html">
 <link href="../font-roboto/roboto.html" rel="import">
 <link href="../core-icon/core-icon.html" rel="import">
 <link href="../core-icons/core-icons.html" rel="import">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="twilio-client.html">
 
 <script src="utils/namesgenerator.js"></script>
 
@@ -40,18 +40,18 @@
 
         </div>
 
-        <div layout vertical>
-          <paper-button on-tap="{{twilioClient.acceptConnection}}">
+        <div layout horizontal>
+          <paper-button raised on-tap="{{twilioClient.acceptConnection}}">
             <core-icon icon="perm-phone-msg"></core-icon>
             Pick Up
           </paper-button>
 
-          <paper-button on-tap="{{twilioClient.hangUp}}">
+          <paper-button raised on-tap="{{twilioClient.hangUp}}">
             <core-icon icon="cancel"></core-icon>
             Hang Up
           </paper-button>
 
-          <paper-button on-tap="{{twilioClient.anyKey}}">
+          <paper-button raised on-tap="{{twilioClient.anyKey}}">
             <core-icon icon="input"></core-icon>
             Any Key
           </paper-button>

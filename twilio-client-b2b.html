@@ -50,7 +50,7 @@
 
     <ul id="people">
       <template repeat="{{pres in twilioClient.available}}">
-        <li hidden="{{!pres.available}}" on-click="{{twilioClient.call(pres.from)}}">
+        <li hidden?="{{!pres.available}}" on-click="{{twilioClient.call(pres.from)}}">
           {{pres.from}}
         </li>
       </template>

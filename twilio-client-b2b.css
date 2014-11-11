@@ -236,6 +236,6 @@ button.anykey:active:before { background-position: 0 -88px; }
   background-color: red;
 }
 
-.userList paper-button {
+.clientButton {
   background-color: white;
 }

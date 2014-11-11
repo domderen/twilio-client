@@ -17,19 +17,14 @@
 
     <core-drawer-panel>
 
-      <div drawer>
-        <ul>
+      <div drawer class="usersList">
           <template repeat="{{pres in twilioClient.available}}">
-            <li>
-              <paper-button raised on-tap="{{twilioClient.call(pres.from)}}" disabled?="{{!pres.available}}">
-                <core-icon icon="account-circle"></core-icon>
-                {{pres.from}}
-                <core-icon icon="radio-button-on" class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
-              </paper-button>
-
-            </li>
+            <paper-button raised on-tap="{{twilioClient.call(pres.from)}}" disabled?="{{!pres.available}}">
+              <core-icon icon="account-circle"></core-icon>
+              {{pres.from}}
+              <core-icon icon="radio-button-on" class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
+            </paper-button>
           </template>
-        </ul>
       </div>
 
       <div main horizontal layout center style="height:100%">

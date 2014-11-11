@@ -64,7 +64,11 @@
             <p>Client Name: <strong>{{clientName}}</strong></p>
           </div>
 
-          <div layout horizontal center-justified>
+          <core-media-query query="max-width: 640px"
+                            queryMatches="{{phoneScreen}}"></core-media-query>
+          <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified>
+
+
             <paper-button raised on-click="{{pickUp}}">
               <core-icon icon="perm-phone-msg"></core-icon>
               Pick Up

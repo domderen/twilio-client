@@ -5,7 +5,7 @@
 
 <polymer-element name="twilio-client-b2b">
   <template>
-    <link href="twilio-client-b2b.css" type="text/css" rel="stylesheet" />
+    <link href="twilio-client-b2b.css" type="text/css" rel="stylesheet"/>
 
     <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
@@ -13,12 +13,23 @@
 
     <div class="descriptionContainer">
       <h2>Browser-to-Browser</h2>
-      <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this demo, open two windows of the same page.</p>
-      <p>Each page will generate its own unique client name. The name of this client is displayed below. On the right hand side, is a list of available clients.</p>
-      <p>If any other client will be available, it will be presented in that list. Just click on the client name to make a connection to this client.</p>
-      <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick Up' button.</p>
+
+      <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
+        demo, open two windows of the same page.</p>
+
+      <p>Each page will generate its own unique client name. The name of this client is displayed below. On the right
+        hand side, is a list of available clients.</p>
+
+      <p>If any other client will be available, it will be presented in that list. Just click on the client name to make
+        a connection to this client.</p>
+
+      <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick Up'
+        button.</p>
+
       <p>To hand up a call, press the 'Hang Up' button.</p>
-      <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call. There is a button for this as well.</p>
+
+      <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
+        There is a button for this as well.</p>
 
       <p>Client Name: <strong>{{clientName}}</strong></p>
 
@@ -37,10 +48,12 @@
 
     <div id="log">{{log}}</div>
 
-    <ul id="people" repeat="{{pres in twilioClient.available}}">
-      <li class="{{ {hidden: !pres.available} | tokenList}}" on-click="{{twilioClient.call(pres.from)}}">
-        {{pres.from}}
-      </li>
+    <ul id="people">
+      <template repeat="{{pres in twilioClient.available}}">
+        <li class="{{ {hidden: !pres.available} | tokenList}}" on-click="{{twilioClient.call(pres.from)}}">
+          {{pres.from}}
+        </li>
+      </template>
     </ul>
   </template>
 

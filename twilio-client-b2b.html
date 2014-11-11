@@ -17,7 +17,8 @@
 
     <core-drawer-panel>
 
-      <div drawer class="usersList">
+      <div drawer class="usersList" layout vertical>
+        <h3 self-center>Clients list</h3>
           <template repeat="{{pres in twilioClient.available}}">
             <paper-button raised on-tap="{{twilioClient.call(pres.from)}}" disabled?="{{!pres.available}}">
               <core-icon icon="account-circle"></core-icon>

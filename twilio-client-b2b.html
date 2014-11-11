@@ -32,9 +32,11 @@
         <core-menu>
           <div class="usersList" layout vertical>
             <template repeat="{{pres in twilioClient.available}}">
-              <paper-button class="clientButton" data-client-name="{{pres.from}}" raised on-click="{{callClient}}" disabled?="{{!pres.available}}">
+              <paper-button class="clientButton" data-client-name="{{pres.from}}" raised on-click="{{callClient}}"
+                            disabled?="{{!pres.available}}">
                 {{pres.from}}
-                <core-icon icon="radio-button-on" class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
+                <core-icon icon="radio-button-on"
+                           class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>
               </paper-button>
             </template>
           </div>
@@ -46,47 +48,48 @@
       </core-toolbar>
 
       <div layout horizontal center-center fit>
-        <core-animated-pages>
-          <div class="descriptionContainer" class="{{ {phoneMargin: phoneScreen} | tokenList}}">
-            <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
-              demo, open two windows of the same page.</p>
+        <div class="descriptionContainer" class="{{ {phoneMargin: phoneScreen} | tokenList}}">
+          <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
+            demo, open two windows of the same page.</p>
 
-            <p>Each page will generate its own unique client name. The name of this client is displayed below. On the right
-              hand side, is a list of available clients.</p>
+          <p>Each page will generate its own unique client name. The name of this client is displayed below. On the
+            right
+            hand side, is a list of available clients.</p>
 
-            <p>If any other client will be available, it will be presented in that list. Just click on the client name to make
-              a connection to this client.</p>
+          <p>If any other client will be available, it will be presented in that list. Just click on the client name to
+            make
+            a connection to this client.</p>
 
-            <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick Up'
-              button.</p>
+          <p>To pick up a call, wait for an incoming connection information in the log message box, and press the 'Pick
+            Up'
+            button.</p>
 
-            <p>To hand up a call, press the 'Hang Up' button.</p>
+          <p>To hand up a call, press the 'Hang Up' button.</p>
 
-            <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
-              There is a button for this as well.</p>
+          <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
+            There is a button for this as well.</p>
 
-            <p>Client Name: <strong>{{clientName}}</strong></p>
-          </div>
+          <p>Client Name: <strong>{{clientName}}</strong></p>
+        </div>
 
-          <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified>
-            <paper-button raised on-click="{{pickUp}}">
-              <core-icon icon="perm-phone-msg"></core-icon>
-              Pick Up
-            </paper-button>
+        <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified>
+          <paper-button raised on-click="{{pickUp}}">
+            <core-icon icon="perm-phone-msg"></core-icon>
+            Pick Up
+          </paper-button>
 
-            <paper-button raised on-click="{{hangUp}}">
-              <core-icon icon="cancel"></core-icon>
-              Hang Up
-            </paper-button>
+          <paper-button raised on-click="{{hangUp}}">
+            <core-icon icon="cancel"></core-icon>
+            Hang Up
+          </paper-button>
 
-            <paper-button raised on-click="{{anyKey}}">
-              <core-icon icon="input"></core-icon>
-              Any Key
-            </paper-button>
-          </div>
+          <paper-button raised on-click="{{anyKey}}">
+            <core-icon icon="input"></core-icon>
+            Any Key
+          </paper-button>
+        </div>
 
-          <div id="log">{{log}}</div>
-        </core-animated-pages>
+        <div id="log">{{log}}</div>
       </div>
     </core-scaffold>
   </template>

@@ -10,6 +10,7 @@
 <link rel="import" href="../core-menu/core-menu.html">
 <link rel="import" href="../core-scaffold/core-scaffold.html">
 <link rel="import" href="../core-image/core-image.html">
+<link rel="import" href="../core-animated-pages/core-animated-pages.html">
 <link rel="import" href="twilio-client.html">
 
 
@@ -19,6 +20,8 @@
   <template>
     <link href="twilio-client-b2b.css" type="text/css" rel="stylesheet"/>
 
+    <core-media-query query="max-width: 640px"
+                      queryMatches="{{phoneScreen}}"></core-media-query>
     <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
     <core-scaffold>
@@ -40,13 +43,11 @@
 
       <core-toolbar tool flex>
         <div flex>Browser-to-Browser</div>
-        <core-icon-button icon="refresh"></core-icon-button>
-        <core-icon-button icon="add"></core-icon-button>
       </core-toolbar>
 
       <div layout horizontal center-center fit>
-        <div flex layout vertical>
-          <div class="descriptionContainer">
+        <core-animated-pages>
+          <div class="descriptionContainer" class="{{ {phoneMargin: phoneScreen} | tokenList}}">
             <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
               demo, open two windows of the same page.</p>
 
@@ -67,11 +68,7 @@
             <p>Client Name: <strong>{{clientName}}</strong></p>
           </div>
 
-          <core-media-query query="max-width: 640px"
-                            queryMatches="{{phoneScreen}}"></core-media-query>
           <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified>
-
-
             <paper-button raised on-click="{{pickUp}}">
               <core-icon icon="perm-phone-msg"></core-icon>
               Pick Up
@@ -89,7 +86,7 @@
           </div>
 
           <div id="log">{{log}}</div>
-        </div>
+        </core-animated-pages>
       </div>
     </core-scaffold>
   </template>

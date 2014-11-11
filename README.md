@@ -80,13 +80,13 @@ Finally, go to **Dashboard -> NUMBERS -> TWILIO NUMBERS** and edit one of your n
  
 Now you are ready to start using the twilio-client. Go to 
 
-    http://[your-application-host]:3000/twilio-client/demo-clients/b2b.html
+    http://[your-application-host]:3000/twilio-client/demo.html
 
 to test browser-to-browser communication.
 
 **Bear in mind, that "/twilio-client" part of URLs is the name of the directory, where you have have cloned this repo. If you cloned it to a directory different than 'twilio-client', you must update the paths to:
 
-    http://[your-application-host]:3000/[twilio-component-folder-name]/demo-clients/b2b.html
+    http://[your-application-host]:3000/[twilio-component-folder-name]/demo.html
 
 and follow the demo instruction.
 

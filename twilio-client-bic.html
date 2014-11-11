@@ -1,0 +1,116 @@
+<link rel="import" href="../polymer/polymer.html">
+<link href="../font-roboto/roboto.html" rel="import">
+<link href="../core-icon/core-icon.html" rel="import">
+<link href="../core-icons/core-icons.html" rel="import">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../core-header-panel/core-header-panel.html">
+<link rel="import" href="../core-toolbar/core-toolbar.html">
+<link rel="import" href="../core-icon-button/core-icon-button.html">
+<link rel="import" href="../core-menu/core-menu.html">
+<link rel="import" href="../core-scaffold/core-scaffold.html">
+<link rel="import" href="../core-image/core-image.html">
+<link rel="import" href="../core-animated-pages/core-animated-pages.html">
+<link rel="import" href="twilio-client.html">
+
+
+<script src="utils/namesgenerator.js"></script>
+
+<polymer-element name="twilio-client-bic">
+  <template>
+    <link href="twilio-client-bic.css" type="text/css" rel="stylesheet"/>
+
+    <core-media-query query="max-width: 640px"
+                      queryMatches="{{phoneScreen}}"></core-media-query>
+
+    <twilio-client capabilityTokenUrl="/capability"></twilio-client>
+
+    <core-scaffold>
+      <core-toolbar tool flex>
+        <div flex>Browser Incoming Call</div>
+      </core-toolbar>
+
+      <div layout vertical center-center>
+        <div class="descriptionContainer">
+          <p>Demo presenting a functionality of aswering incoming calls in the browser.</p>
+
+          <p>After the component is ready to use, you can can the number connected with your Twilio application, and pick up the phone here.</p>
+
+          <p>The call will be automatically picked up on incoming connection.</p>
+
+          <p>To hand up a call, press the 'Hang Up' button.</p>
+
+          <p>With twilio demo account, it is sometimes necessary to press 'Any Key', in order to continue with the call.
+            There is a button for this as well.</p>
+
+          <p>Phone Number: <strong>{{phoneNumber}}</strong></p>
+        </div>
+
+        <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
+          <paper-button raised on-click="{{hangUp}}">
+            <core-icon icon="cancel"></core-icon>
+            Hang Up
+          </paper-button>
+
+          <paper-button raised on-click="{{anyKey}}">
+            <core-icon icon="input"></core-icon>
+            Any Key
+          </paper-button>
+        </div>
+
+        <div id="log">{{log}}</div>
+      </div>
+    </core-scaffold>
+  </template>
+
+  <script>
+    (function () {
+      var self;
+
+      Polymer({
+        log: 'Loading pigeons...',
+
+        phoneNumber: '+48 12 881 08 40',
+
+        ready: function () {
+          self = this;
+
+          self.clientName = utils.namesgenerator();
+          self.twilioClient = this.shadowRoot.querySelector('twilio-client');
+          self.twilioClient.clientName = this.clientName;
+          self.twilioClient.auto = true;
+
+          // Set up event listeners for custom events.
+          self.twilioClient.addEventListener('device-ready', function () {
+            self.log = "Ready";
+          });
+
+          self.twilioClient.addEventListener('device-error', function (e) {
+            self.log = "Error: " + e.detail.error.message;
+          });
+
+          self.twilioClient.addEventListener('device-connect', function () {
+            self.log = "Successfully established call";
+          });
+
+          self.twilioClient.addEventListener('device-disconnect', function () {
+            self.log = "Call ended";
+          });
+
+          self.twilioClient.addEventListener('device-incoming', function (e) {
+            self.log = "Incoming connection from " + e.detail.connection.parameters.From;
+            self.twilioClient.acceptConnection();
+          });
+        },
+
+        hangUp: function () {
+          self.twilioClient.hangUp();
+        },
+
+        anyKey: function () {
+          self.twilioClient.hangUp();
+        }
+      });
+    })();
+  </script>
+</polymer-element>

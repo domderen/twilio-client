@@ -49,17 +49,20 @@
   client.auto = true;
 
   document.addEventListener('polymer-ready', function () {
+    // Get reference to buttons.
     var callButton = document.querySelector('.call');
     var hangUpButton = document.querySelector('.hangup');
     var anyKeyButton = document.querySelector('.anykey');
+
+    // Attach actions to buttons.
     callButton.onclick = function () {
       var number = document.querySelector('#number').value;
       client.call(number);
     };
-
     hangUpButton.onclick = client.hangUp;
     anyKeyButton.onclick = client.anyKey;
 
+    // Set up event listeners for custom events.
     client.addEventListener('device-ready', function () {
       logMessage.innerHTML = "Ready";
     });

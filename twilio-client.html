@@ -274,7 +274,7 @@ and supports browser-to-browser calls.
 
             if (self.isValidPhoneNumber(callParam || self.number)) {
               params = {"PhoneNumber": callParam || self.number};
-            } else if (self.number) {
+            } else if (callParam || self.number) {
               params = {"ClientName": callParam || self.number};
             }
 

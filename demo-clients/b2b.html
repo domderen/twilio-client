@@ -18,20 +18,17 @@
 <h3>Client Name</h3>
 <h4 id="clientName"></h4>
 
-<button class="call" on-click="{{call}}">
-  Call
+<button class="call">
+  Pick Up
 </button>
 
-<button class="hangup" on-click="{{hangUp}}">
+<button class="hangup">
   Hang Up
 </button>
 
-<button class="anykey" on-click="{{anyKey}}">
+<button class="anykey">
   Any Key
 </button>
-
-<input id="number" name="number" type="text"
-       placeholder="Enter a phone number to call"/>
 
 <div id="log">Loading pigeons...</div>
 
@@ -50,15 +47,12 @@
 
   document.addEventListener('polymer-ready', function () {
     // Get reference to buttons.
-    var callButton = document.querySelector('.call');
+    var pickUpButton = document.querySelector('.call');
     var hangUpButton = document.querySelector('.hangup');
     var anyKeyButton = document.querySelector('.anykey');
 
     // Attach actions to buttons.
-    callButton.onclick = function () {
-      var number = document.querySelector('#number').value;
-      client.call(number);
-    };
+    pickUpButton.onclick client.acceptConnection;
     hangUpButton.onclick = client.hangUp;
     anyKeyButton.onclick = client.anyKey;
 

@@ -221,14 +221,14 @@ and supports browser-to-browser calls.
             self.fire('device-presence', {presence: presence});
 
             var alreadyExists = _.find(self.available, function (av) {
-              return av.from === pres.from;
+              return av.from === presence.from;
             });
 
             if (alreadyExists) {
-              alreadyExists.available = pres.available;
+              alreadyExists.available = presence.available;
             }
             else {
-              self.available.push(pres);
+              self.available.push(presence);
             }
           });
         },

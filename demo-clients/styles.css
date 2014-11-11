@@ -220,3 +220,7 @@ button.anykey:before { background-position: 0 -131px; }
 button.anykey:hover:before,
 button.anykey:focus:before,
 button.anykey:active:before { background-position: 0 -88px; }
+
+.descriptionContainer {
+  background: white;
+}

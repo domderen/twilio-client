@@ -66,7 +66,7 @@
           </div>
 
           <div layout horizontal center-justified>
-            <paper-button raised on-click="{{twilioClient.acceptConnection}}">
+            <paper-button raised on-click="{{doSomething}}">
               <core-icon icon="perm-phone-msg"></core-icon>
               Pick Up
             </paper-button>
@@ -123,6 +123,10 @@
           self.twilioClient.addEventListener('device-incoming', function (e) {
             self.log = "Incoming connection from " + e.detail.connection.parameters.From;
           });
+        },
+
+        doSomething: function () {
+          console.log('something');
         }
       });
     })();

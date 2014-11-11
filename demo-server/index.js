@@ -67,6 +67,9 @@ app.get('/capability/', function (req, res) {
 app.get('/', function (req, res) {
   var resp = new twilio.TwimlResponse();
 
+  console.log('GET parameters:');
+  console.log(req.query);
+
   resp.dial({
     callerId: nconf.get('callerId')
   }, function(node) {
@@ -86,6 +89,7 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   var resp = new twilio.TwimlResponse();
 
+  console.log('POST parameters:');
   console.log(req.body);
 
   resp.dial({

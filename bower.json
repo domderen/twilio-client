@@ -65,7 +65,7 @@
     "core-selector": "^0.4.0",
     "core-selection": "^0.4.0",
     "core-media-query": "^0.4.0",
-    "core-icon-button": "~0.4.2",
+    "core-icon-button": "^0.4.0",
     "core-drawer-panel": "~0.4.2",
     "core-header-panel": "~0.4.2",
     "core-toolbar": "~0.4.2",
@@ -73,6 +73,7 @@
     "core-item": "^0.4.0",
     "core-style": "^0.4.0",
     "core-transition": "^0.4.0",
-    "core-input": "^0.4.0"
+    "core-input": "^0.4.0",
+    "core-field": "^0.4.0"
   }
 }

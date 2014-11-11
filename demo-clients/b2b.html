@@ -13,12 +13,10 @@
 </head>
 <body unresolved>
 
-<h3>Client Name</h3>
-<h4 id="clientName"></h4>
 <twilio-client capabilityTokenUrl="/capability"></twilio-client>
 
-<input class="number" type="text"
-       placeholder="Enter a phone number to call"/>
+<h3>Client Name</h3>
+<h4 id="clientName"></h4>
 
 <button class="call" on-click="{{call}}">
   Call
@@ -32,10 +30,18 @@
   Any Key
 </button>
 
+<input id="number" name="number" type="text"
+       placeholder="Enter a phone number to call"/>
+
+<div id="log">Loading pigeons...</div>
+
+<ul id="people"/>
 
 <script>
   var client = document.querySelector('twilio-client');
   var clientNameDiv = document.querySelector('#clientName');
+  var logMessage = document.querySelector('#log');
+  var peopleList = document.querySelector('#people');
   var clientName = Utils.NamesGenerator();
 
   clientNameDiv.innerHTML = clientName;
@@ -47,12 +53,44 @@
     var hangUpButton = document.querySelector('.hangup');
     var anyKeyButton = document.querySelector('.anykey');
     callButton.onclick = function () {
-      var number = document.querySelector('.number').value;
+      var number = document.querySelector('#number').value;
       client.call(number);
     };
 
     hangUpButton.onclick = client.hangUp;
     anyKeyButton.onclick = client.anyKey;
+
+    client.addEventListener('device-ready', function () {
+      logMessage.innerHTML = "Ready";
+    });
+
+    client.addEventListener('device-error', function (e) {
+      logMessage.innerHTML = "Error: " + e.error.message;
+    });
+
+    client.addEventListener('device-connect', function () {
+      logMessage.innerHTML = "Successfully established call";
+    });
+
+    client.addEventListener('device-disconnect', function () {
+      logMessage.innerHTML = "Call ended";
+    });
+
+    client.addEventListener('device-incoming', function (e) {
+      logMessage.innerHTML = "Incoming connection from " + e.connection.parameters.From;
+    });
+
+    client.addEventListener('device-presence', function (e) {
+      if(e.presence.available) {
+        var newElement = document.createElement('li');
+        newElement.id = e.presence.from;
+        newElement.innerHTML = e.presence.from;
+        peopleList.appendChild(newElement);
+      } else {
+        var elementToDelete = document.querySelector('#' + e.presence.from);
+        elementToDelete.parentNode.removeChild(elementToDelete);
+      }
+    });
   });
 </script>
 </body>

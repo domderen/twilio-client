@@ -74,7 +74,7 @@ Next, to finish setting up Twilio application, go to your **Twilio Dashboard -> 
     
     http://[your-application-host]:3000/
      
-and as a method choose HTTP GET.
+and as a method either leave the default HTTP POST or choose HTTP GET (both should work).
  
 Finally, go to **Dashboard -> NUMBERS -> TWILIO NUMBERS** and edit one of your numbers. In the details page, connect the number with the application that you have just configured.
  

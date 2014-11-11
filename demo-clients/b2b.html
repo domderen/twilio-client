@@ -44,7 +44,7 @@
   var peopleList = document.querySelector('#people');
   var clientName = Utils.NamesGenerator();
 
-  clientNameDiv.innerHTML = clientName;
+  clientNameDiv.innerText = clientName;
   client.clientName = clientName;
   client.auto = true;
 
@@ -64,23 +64,23 @@
 
     // Set up event listeners for custom events.
     client.addEventListener('device-ready', function () {
-      logMessage.innerHTML = "Ready";
+      logMessage.innerText = "Ready";
     });
 
     client.addEventListener('device-error', function (e) {
-      logMessage.innerHTML = "Error: " + e.detail.error.message;
+      logMessage.innerText = "Error: " + e.detail.error.message;
     });
 
     client.addEventListener('device-connect', function () {
-      logMessage.innerHTML = "Successfully established call";
+      logMessage.innerText = "Successfully established call";
     });
 
     client.addEventListener('device-disconnect', function () {
-      logMessage.innerHTML = "Call ended";
+      logMessage.innerText = "Call ended";
     });
 
     client.addEventListener('device-incoming', function (e) {
-      logMessage.innerHTML = "Incoming connection from " + e.detail.connection.parameters.From;
+      logMessage.innerText = "Incoming connection from " + e.detail.connection.parameters.From;
     });
 
     client.addEventListener('device-presence', function (e) {
@@ -89,7 +89,7 @@
       if(pres.available) {
         var newElement = document.createElement('li');
         newElement.id = pres.from;
-        newElement.innerHTML = pres.from;
+        newElement.innerText = pres.from;
         peopleList.appendChild(newElement);
       } else {
         var elementToDelete = document.querySelector('#' + pres.from);

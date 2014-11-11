@@ -4,7 +4,7 @@ twilio-client
 Twilio client element, being able to perform outgoing calls, receive incoming calls,
 and supports browser-to-browser calls.
 
-See the [component page](http://domderen.github.io/components/twilio-client) for more information.
+See the [component page](http://docker-app-srv.cloudapp.net:3000/twilio-client/index.html) for more information.
 
 ## Getting Started
 
@@ -12,6 +12,9 @@ Inspired by Szymon Nowak during the presentation [WebRTC - so much more than jus
 
 To run the demo application, please follow the steps described in the "Run demo" section.
 
+Demo application available at: [http://docker-app-srv.cloudapp.net:3000/twilio-client/demo.html](http://docker-app-srv.cloudapp.net:3000/twilio-client/demo.html)
+
+Component documentation available at: [http://docker-app-srv.cloudapp.net:3000/twilio-client/index.html](http://docker-app-srv.cloudapp.net:3000/twilio-client/index.html)
 ## Example
 
 Examplary use of the component on the web page. For 

@@ -1,7 +1,7 @@
 body {
   text-align: center;
   margin: 0;
-  background: url(imgs/logo.png) top center no-repeat, url(imgs/whitey.png) center top repeat;
+  background: url(imgs/whitey.png) center top repeat;
 }
 
 #log {
@@ -222,5 +222,6 @@ button.anykey:focus:before,
 button.anykey:active:before { background-position: 0 -88px; }
 
 .descriptionContainer {
-  background: white;
+  max-width: 1000px;
+  margin: 0 auto;
 }

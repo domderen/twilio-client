@@ -126,7 +126,7 @@
         },
 
         callClient: function (event, detail, sender) {
-          self.twilioClient.call(sender.clientName);
+          self.twilioClient.call(sender.dataset.clientName);
         },
 
         pickUp: function () {

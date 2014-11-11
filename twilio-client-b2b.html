@@ -60,23 +60,23 @@
           self.twilioClient.auto = true;
 
           // Set up event listeners for custom events.
-          client.addEventListener('device-ready', function () {
+          self.twilioClient.addEventListener('device-ready', function () {
             self.log = "Ready";
           });
 
-          client.addEventListener('device-error', function (e) {
+          self.twilioClient.addEventListener('device-error', function (e) {
             self.log = "Error: " + e.detail.error.message;
           });
 
-          client.addEventListener('device-connect', function () {
+          self.twilioClient.addEventListener('device-connect', function () {
             self.log = "Successfully established call";
           });
 
-          client.addEventListener('device-disconnect', function () {
+          self.twilioClient.addEventListener('device-disconnect', function () {
             self.log = "Call ended";
           });
 
-          client.addEventListener('device-incoming', function (e) {
+          self.twilioClient.addEventListener('device-incoming', function (e) {
             self.log = "Incoming connection from " + e.detail.connection.parameters.From;
           });
         }

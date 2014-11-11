@@ -53,6 +53,7 @@
 
     <core-toolbar tool flex>
       <div flex>{{selectedPage.page.name}}</div>
+      <core-icon-button icon="refresh" on-tap="{{cleanPages}}"></core-icon-button>
     </core-toolbar>
 
     <div layout horizontal center-center>
@@ -78,7 +79,6 @@
 
     var template = document.querySelector('#t');
     var ajax, pages, scaffold;
-    var cache = {};
 
     template.pages = [
       {name: 'Incoming call', hash: 'bic', url: 'bic-demo.html'},
@@ -132,10 +132,7 @@
 
         // Need to wait one rAF so <core-ajax> has it's URL set.
         this.async(function () {
-          if (!cache[ajax.url]) {
-            ajax.go();
-          }
-
+          ajax.go();
           scaffold.closeDrawer();
         });
 
@@ -150,10 +147,18 @@
       var article = detail.response;
       var html = article.querySelector('article').innerHTML;
 
-      cache[ajax.url] = html; // Primitive caching by URL.
+      template.cleanPages();
 
       this.injectBoundHTML(html, pages.selectedItem.firstElementChild);
     };
+
+    template.cleanPages = function () {
+      var allPages = pages.querySelectorAll('section');
+
+      for(var i = 0; i < allPages.length; i++) {
+        document.querySelector('#pages').querySelectorAll('section')[i].firstElementChild.innerHTML = "";
+      }
+    }
 
   })();
 </script>

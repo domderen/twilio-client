@@ -48,7 +48,7 @@
       </core-toolbar>
 
       <div layout vertical center-center>
-        <div class="descriptionContainer" class="{{ {phoneMargin: phoneScreen} | tokenList}}">
+        <div class="descriptionContainer">
           <p>Demo presenting a possible browser to browser connection between two separate twilio clients. To test this
             demo, open two windows of the same page.</p>
 
@@ -72,7 +72,7 @@
           <p>Client Name: <strong>{{clientName}}</strong></p>
         </div>
 
-        <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified>
+        <div layout vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}" center-justified style="width: 95%;">
           <paper-button raised on-click="{{pickUp}}">
             <core-icon icon="perm-phone-msg"></core-icon>
             Pick Up

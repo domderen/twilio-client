@@ -99,7 +99,6 @@ button.call, button.hangup, button.anykey {
   display: inline-block;
   padding: 0.5em 1em;
   border: 1px solid #d4d4d4;
-  margin: 300px 0 0 0;
   text-decoration: none;
   text-shadow: 1px 1px 0 #fff;
   font:35px/normal sans-serif;

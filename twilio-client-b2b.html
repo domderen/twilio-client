@@ -28,7 +28,7 @@
         <core-menu>
           <div class="usersList" layout vertical>
             <template repeat="{{pres in twilioClient.available}}">
-              <paper-button class="clientButton" data-client-name="{{[pres.from}}" raised on-click="{{callClient}}" disabled?="{{!pres.available}}">
+              <paper-button class="clientButton" data-client-name="{{pres.from}}" raised on-click="{{callClient}}" disabled?="{{!pres.available}}">
                 <core-icon icon="account-circle"></core-icon>
                 {{pres.from}}
                 <core-icon icon="radio-button-on" class="{{ {green: pres.available, grey: !pres.available} | tokenList}}"></core-icon>

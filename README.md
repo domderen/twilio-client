@@ -1,6 +1,8 @@
 twilio-client
 ================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/domderen/twilio-client.svg)](https://greenkeeper.io/)
+
 Twilio client element, being able to perform outgoing calls, receive incoming calls,
 and supports browser-to-browser calls.
 

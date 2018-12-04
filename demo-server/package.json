@@ -11,7 +11,7 @@
   "dependencies": {
     "body-parser": "^1.9.2",
     "express": "^4.10.1",
-    "nconf": "^0.6.9",
-    "twilio": "^1.7.0"
+    "nconf": "^0.10.0",
+    "twilio": "^3.25.0"
   }
 }
